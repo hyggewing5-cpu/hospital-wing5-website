@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>เว็บไซต์โรงพยาบาลกองบิน 5</title>
+<script src="config.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#1d4fd8;--brand-2:#4a86ff;--brand-d:#12328f;--brand-l:#eaf2ff;--brand-m:#cfe0ff;--on-brand:#fff;
+  --accent:#3b9bff;--accent-d:#2e79c7;--on-accent:#fff;--hero-hl:#8fc4ff;
+  --primary:#1d4fd8;--primary-text:#fff;
+  --hero-a:#cfe0ff;--hero-ov1:rgba(240,246,255,.95);--hero-ov2:rgba(240,246,255,0);
+  --bg:#eaf3ff;--bg2:#f6faff;--btn:#1d4fd8;--btn-2:#4a86ff;--btn-text:#fff;--ink:#14244a;--muted:#62729a;--line:#dde7fb;--card:#fff;--radius:22px;
+  --sh:rgba(29,79,216,.14);
+  --shadow:0 10px 30px rgba(29,79,216,.12);
+  --serif:'Noto Sans Thai',sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{font-family:'Noto Sans Thai',sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.55}
+/* ลูกเล่นพื้นหลัง: วงกลมโบเก้นุ่ม ๆ */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+  radial-gradient(circle 90px at 3% 32%,rgba(255,255,255,.95),rgba(255,255,255,0)),
+  radial-gradient(circle 110px at 98% 46%,rgba(110,165,255,.32),rgba(110,165,255,0)),
+  radial-gradient(circle 130px at 1% 78%,rgba(110,165,255,.26),rgba(110,165,255,0)),
+  radial-gradient(circle 100px at 92% 92%,rgba(255,255,255,.95),rgba(255,255,255,0)),
+  linear-gradient(180deg,var(--bg) 0%,var(--bg2) 55%,var(--bg) 100%)}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+h1,h2,h3,h4,p{margin:0}
+a{color:var(--primary)}
+.i{width:1.25em;height:1.25em;flex:0 0 auto;vertical-align:-.25em}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+.pg{padding-top:30px;padding-bottom:10px}
+/* Header */
+.hdr{background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);position:sticky;top:0;z-index:50;box-shadow:0 1px 0 rgba(255,255,255,.9),0 8px 24px rgba(29,79,216,.07)}
+.hdr .wrap{display:flex;align-items:center;gap:18px;min-height:78px;max-width:1480px}
+.logo-b{display:flex;align-items:center;gap:12px;border:0;background:none;cursor:pointer;text-align:left;padding:0;color:var(--brand-d);flex:0 0 auto;min-width:0}
+.lgc{width:54px;height:54px;border-radius:50%;overflow:hidden;background:#fff;border:2px solid var(--brand-m);box-shadow:0 4px 12px var(--sh);display:grid;place-items:center;font-weight:700;font-family:var(--serif);font-size:24px;color:var(--brand);flex:0 0 54px}
+.lgc img{width:100%;height:100%;object-fit:cover;display:block}
+.logo-b>span:last-child{display:block;min-width:0}
+.logo-b b{display:block;font-family:var(--serif);font-weight:700;font-size:19px;line-height:1.3;white-space:nowrap}
+.logo-b small{display:block;color:var(--muted);font-size:12px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+.hnav{display:flex;align-items:center;gap:1px;margin-left:auto;flex:0 1 auto;min-width:0;background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.95);border-radius:999px;padding:5px;box-shadow:0 6px 20px var(--sh)}
+.hnav button{border:0;background:none;cursor:pointer;font-weight:600;font-size:13px;color:var(--ink);padding:8px 11px;border-radius:999px;white-space:nowrap;transition:background .15s,color .15s}
+.hnav button:hover{background:var(--brand-l);color:var(--brand)}
+.hnav button.active{background:linear-gradient(135deg,var(--brand-2),var(--brand));color:var(--on-brand);box-shadow:0 6px 14px var(--sh)}
+.hdr-r{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+.hdr-r .adm{margin-right:8px;white-space:nowrap}
+.ib{width:42px;height:42px;border:1px solid rgba(255,255,255,.95);background:rgba(255,255,255,.75);box-shadow:0 4px 14px var(--sh);border-radius:50%;cursor:pointer;display:grid;place-items:center;color:var(--brand)}
+.ib:hover{background:#fff}
+.ib .i{width:20px;height:20px}
+.tb-menu{display:none}
+/* Components */
+.card{background:rgba(255,255,255,.86);border:1px solid rgba(255,255,255,.95);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:10px 22px;cursor:pointer;font-weight:600;background:linear-gradient(135deg,var(--btn-2),var(--btn));color:var(--btn-text);box-shadow:0 6px 16px var(--sh);transition:filter .15s,transform .05s}
+.btn .i{width:1.05em;height:1.05em}
+.btn:hover{filter:brightness(1.08)}.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.ghost{background:var(--brand-l);color:var(--brand);box-shadow:none}
+.btn.danger{background:#ffe3e6;color:#b4232f;box-shadow:none}
+.btn.gold{background:linear-gradient(135deg,var(--accent),var(--accent-d));color:var(--on-accent)}
+.btn.line{background:rgba(255,255,255,.92);border:1.5px solid var(--brand-m);color:var(--brand);padding:8px 22px;box-shadow:0 6px 16px var(--sh)}
+.btn.out{background:#fff;border:1.5px solid var(--brand-m);color:var(--brand);padding:8px 18px;box-shadow:none}
+.btn.sm{padding:6px 14px;font-size:13px}
+.btn.out.sm{padding:5px 13px}
+.btn.block{width:100%}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+input[type=text],input[type=number],input[type=date],input[type=password],select,textarea{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;background:#fff}
+textarea{min-height:90px;resize:vertical}
+label.f{display:block;font-weight:600;font-size:13.5px;margin-bottom:5px}
+.field{margin-bottom:14px}
+.req{color:#d6293b}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:0 16px}
+.page-title{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.page-title h2{font-size:25px;font-family:var(--serif);font-weight:700;color:var(--brand-d)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.chip{display:inline-block;padding:2px 12px;border-radius:999px;background:var(--brand-l);color:var(--brand);font-size:12.5px;font-weight:500}
+.empty{text-align:center;color:var(--muted);padding:44px 16px}
+.empty .big{font-size:42px;margin-bottom:6px}
+/* Home */
+.eyebrow{color:var(--accent-d);font-size:12.5px;font-weight:700;letter-spacing:.06em}
+.h2s{font-family:var(--serif);font-size:clamp(24px,3vw,32px);color:var(--brand-d);margin-top:4px;line-height:1.3;font-weight:700}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.hero2{position:relative;min-height:480px;color:var(--ink);background:linear-gradient(135deg,#f6faff,#d6e6ff);overflow:hidden;padding-bottom:70px;border-radius:0 0 44px 44px}
+.hs{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .9s}
+.hs.on{opacity:1}
+.hero2::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--hero-ov1) 0%,var(--hero-ov1) 28%,var(--hero-ov2) 78%);z-index:1}
+.hero2::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  radial-gradient(circle 60px at 6% 22%,rgba(90,150,255,.34),rgba(90,150,255,0)),
+  radial-gradient(circle 80px at 93% 12%,rgba(90,150,255,.30),rgba(90,150,255,0)),
+  radial-gradient(circle 100px at 97% 78%,rgba(70,130,255,.28),rgba(70,130,255,0)),
+  radial-gradient(circle 70px at 3% 84%,rgba(255,255,255,.85),rgba(255,255,255,0))}
+.hero2 .art{position:absolute;right:9%;top:50%;transform:translateY(-62%);width:300px;z-index:1}
+.hero2 .art svg{width:100%;display:block}
+.hero-in{position:relative;z-index:2;min-height:410px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-top:20px}
+.hero-in h1{font-family:var(--serif);font-size:clamp(32px,4.8vw,56px);line-height:1.25;font-weight:800;max-width:680px;color:var(--brand-d)}
+.hero-in h1 em{font-style:normal;color:var(--accent);display:block}
+.hero-in p{margin-top:16px;max-width:520px;font-size:16.5px;color:#3a4d78}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+/* ปุ่มเลื่อนหน้าปก: วงกลมเล็ก โปร่งนิด ๆ ใช้ไอคอน chevron */
+.hnv{position:absolute;top:calc(50% - 30px);width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.9);background:rgba(255,255,255,.7);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--brand);z-index:3;cursor:pointer;display:grid;place-items:center;padding:0;box-shadow:0 4px 12px var(--sh);opacity:.75;transition:opacity .15s,background .15s,transform .15s}
+.hnv .i{width:20px;height:20px}
+.hnv:hover{opacity:1;background:#fff;transform:scale(1.06)}
+.hnv.prv{left:20px}.hnv.nx{right:20px}
+.hdots{position:absolute;bottom:88px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
+.hdots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.9);box-shadow:0 0 0 1px rgba(29,79,216,.25)}.hdots i.on{background:var(--accent);width:22px;border-radius:9px}
+.strip-w{margin-top:-62px;position:relative;z-index:5}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.strip button{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid rgba(255,255,255,.95);background:rgba(255,255,255,.84);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-radius:20px;text-align:left;cursor:pointer;box-shadow:0 12px 28px var(--sh);transition:transform .15s,background .15s}
+.strip button:hover{transform:translateY(-3px);background:#fff}
+.strip .qi{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;color:#fff;flex:0 0 50px;background:linear-gradient(135deg,#5b95ff,#2358e6);box-shadow:0 8px 16px rgba(37,99,235,.28)}
+.strip .qi .i{width:26px;height:26px}
+.strip button:nth-child(5n+2) .qi{background:linear-gradient(135deg,#3be0c0,#0ea58a);box-shadow:0 8px 16px rgba(14,165,138,.28)}
+.strip button:nth-child(5n+3) .qi{background:linear-gradient(135deg,#ffbe5c,#f08a12);box-shadow:0 8px 16px rgba(240,138,18,.28)}
+.strip button:nth-child(5n+4) .qi{background:linear-gradient(135deg,#a77bff,#6d3df0);box-shadow:0 8px 16px rgba(109,61,240,.28)}
+.strip button:nth-child(5n+5) .qi{background:linear-gradient(135deg,#ff8ab4,#e0407a);box-shadow:0 8px 16px rgba(224,64,122,.28)}
+.strip b{display:block;font-size:13.5px;color:var(--brand-d);line-height:1.3}
+.strip div span{display:block;font-size:12.5px;color:var(--muted);line-height:1.4}
+.strip .qa{margin-left:auto;color:var(--brand);display:flex;font-style:normal}
+.strip .qa .i{width:18px;height:18px}
+/* หน้าหลัก: 3 คอลัมน์ 1:2:1 */
+.home3-w{padding-top:44px}
+.home3{display:grid;grid-template-columns:1fr 2fr 1fr;gap:24px;align-items:start}
+.h3c{display:flex;flex-direction:column;gap:22px;min-width:0}
+.bx{background:rgba(255,255,255,.84);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.95);overflow:hidden}
+.bx-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:14px 18px;background:linear-gradient(90deg,rgba(234,242,255,.9),rgba(255,255,255,.4));border-bottom:1px solid var(--line)}
+.bx-hd h3{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:700;font-size:18px;color:var(--brand-d)}
+.bx-hd h3 .i{width:34px;height:34px;padding:7px;border-radius:11px;background:linear-gradient(135deg,var(--brand-2),var(--brand));color:#fff;box-shadow:0 6px 12px var(--sh)}
+.bx-bd{padding:16px 18px}
+.bx .card{box-shadow:none;padding:0;background:transparent;border:0}
+.dir-im{aspect-ratio:4/5;background:var(--brand-l);display:grid;place-items:center}
+.dir-im img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.dir-ph .i{width:90px;height:90px;color:var(--brand-m)}
+.dir-cap{padding:14px 16px;text-align:center;background:linear-gradient(135deg,var(--brand),var(--brand-d));color:var(--on-brand);border-top:4px solid var(--accent)}
+.dir-cap b{display:block;font-family:var(--serif);font-weight:700;font-size:18px;line-height:1.35;overflow-wrap:anywhere}
+.dir-cap span{font-size:13.5px;opacity:.9}
+.inf-i{padding:9px 0;border-bottom:1px dashed var(--line)}
+.inf-i:first-child{padding-top:0}
+.inf-i small{display:block;color:var(--muted);font-size:12.5px}
+.inf-i b{display:block;font-weight:600;overflow-wrap:anywhere;white-space:pre-line}
+.inf-btn{margin-top:14px}
+.aw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+.aw-grid .gc{box-shadow:0 6px 16px var(--sh);border:1px solid var(--line)}
+.aw-grid .gc .tx b{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+/* สไลด์ข่าวประชาสัมพันธ์ / ภาพกิจกรรม (หน้าหลัก) */
+.hc-st{position:relative}
+.hc-im{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:var(--brand-l);cursor:zoom-in;box-shadow:0 8px 20px var(--sh)}
+.hc-im img{width:100%;height:100%;object-fit:cover;display:block}
+.hc-im em{position:absolute;right:10px;top:10px;background:rgba(18,50,143,.7);color:#fff;border-radius:999px;font-style:normal;padding:1px 12px;font-size:12.5px}
+/* ปุ่มเลื่อนสไลด์ข่าวประชาสัมพันธ์ / ภาพกิจกรรม: วงกลมเล็ก เรียบ ๆ */
+.hc-nv{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.9);background:rgba(255,255,255,.82);color:var(--brand);box-shadow:0 3px 10px rgba(18,50,143,.2);cursor:pointer;z-index:2;display:grid;place-items:center;padding:0;opacity:.8;transition:opacity .15s,background .15s}
+.hc-nv .i{width:18px;height:18px}
+.hc-nv:hover{opacity:1;background:#fff}
+.hc-nv.prv{left:8px}.hc-nv.nx{right:8px}
+.hc-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2;pointer-events:none}
+.hc-dots i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7)}
+.hc-dots i.on{background:#fff;width:20px;border-radius:8px}
+.hc-cap{padding:14px 4px 2px}
+.hc-cap b{display:block;font-family:var(--serif);font-weight:700;font-size:18px;line-height:1.4;overflow-wrap:anywhere;color:var(--ink)}
+.hc-cap small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.hc-cap p{margin-top:6px;line-height:1.7;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.hc-cap .row{margin-top:10px}
+/* ข่าวประชาสัมพันธ์: การ์ดรูปเต็มสัดส่วน A4 เรียงต่อกัน เลื่อนอัตโนมัติ */
+.prs-w{position:relative}
+.prs-w .hc-nv{top:36%}
+.prs{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding-bottom:4px}
+.prs::-webkit-scrollbar{display:none}
+.prc{flex:0 0 calc((100% - 28px)/3);scroll-snap-align:start;min-width:0}
+.prc-im{aspect-ratio:210/297;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:zoom-in;box-shadow:0 8px 20px var(--sh);display:grid;place-items:center}
+.prc-im img{width:100%;height:100%;object-fit:contain;display:block}
+.prc-cap{padding:10px 2px 0}
+.prc-cap b{display:block;font-weight:700;font-size:14.5px;line-height:1.4;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.prc-cap small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.prc-cap p{margin-top:4px;font-size:13px;line-height:1.55;color:var(--muted);overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.prc-cap .row{margin-top:8px}
+@media (max-width:600px){.prc{flex-basis:calc((100% - 14px)/2)}}
+/* เว็บไซต์ที่เกี่ยวข้อง (คอลัมน์ขวา) */
+.lk-list{display:flex;flex-direction:column;gap:10px}
+.lkw{display:flex;flex-direction:column;gap:6px}
+.lkw .row{justify-content:flex-end}
+.lk-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.75);border:1px solid var(--line);color:var(--ink);text-decoration:none;transition:border-color .15s,transform .15s,box-shadow .15s}
+a.lk-row:hover,button.lk-row:hover{border-color:var(--brand-2);transform:translateX(3px);box-shadow:0 6px 16px var(--sh)}
+button.lk-row{width:100%;font:inherit;text-align:left;cursor:pointer}
+.lk-go{margin-left:auto;display:flex;color:var(--brand)}
+.lk-logo{width:44px;height:44px;display:grid;place-items:center;color:var(--brand);flex:0 0 44px}
+.lk-logo img{width:100%;height:100%;object-fit:contain;display:block}
+.lk-logo .i{width:42px;height:42px;padding:9px;border-radius:13px;background:#e4eeff;color:#2563eb}
+.lk-list>.lk-row:nth-child(4n+2) .lk-logo .i{background:#dcf7f1;color:#0e9a82}
+.lk-list>.lk-row:nth-child(4n+3) .lk-logo .i{background:#fff0dc;color:#e07a12}
+.lk-list>.lk-row:nth-child(4n+4) .lk-logo .i{background:#efe6ff;color:#6d3df0}
+.lk-name{font-weight:600;line-height:1.35;font-size:14.5px;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* หน้าข้อมูลโรงพยาบาล (สไตล์ "เกี่ยวกับเรา") */
+.ab-hero{text-align:center;padding:46px 20px;border-radius:32px;background:linear-gradient(135deg,var(--brand-d),var(--brand));border-bottom:5px solid var(--accent);box-shadow:var(--shadow)}
+.ab-hero h2{font-family:var(--serif);font-weight:800;font-size:clamp(28px,4vw,42px);color:var(--on-brand);line-height:1.3}
+.ab-hero p{margin-top:8px;color:var(--hero-hl);font-size:17px}
+.ab-filter{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.95);border-radius:26px;padding:16px 18px;margin-top:24px;box-shadow:0 6px 18px var(--sh)}
+.ab-search{display:flex;align-items:center;gap:8px;flex:1 1 260px;max-width:420px;background:var(--bg2);border:1.5px solid var(--line);border-radius:999px;padding:0 16px;color:var(--muted)}
+.ab-search input[type=text]{border:0;background:transparent;padding:10px 4px;outline:0;border-radius:0}
+.ab-tabs{display:flex;gap:10px;flex-wrap:wrap;flex:1 1 100%;justify-content:center}
+.ab-tabs button{border:1.5px solid var(--line);background:var(--bg2);border-radius:999px;padding:8px 18px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink);transition:background .15s,border-color .15s}
+.ab-tabs button:hover{border-color:var(--accent)}
+.ab-tabs button.on{background:linear-gradient(135deg,var(--brand-2),var(--brand));border-color:transparent;color:var(--on-brand);box-shadow:0 0 0 4px rgba(74,134,255,.2)}
+.ab-tabs button.add{border-style:dashed;border-color:var(--brand);color:var(--brand);background:#fff}
+.ab-wrap{background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.95);border-radius:32px;padding:28px;margin-top:24px;box-shadow:0 6px 18px var(--sh);display:flex;flex-direction:column;gap:22px}
+.ab-card{border:1px solid var(--line);border-radius:26px;padding:34px 44px 38px;background:#fff}
+.ab-t{display:flex;align-items:center;justify-content:center;gap:16px;font-family:var(--serif);font-weight:700;font-size:clamp(22px,2.6vw,28px);color:var(--ink);text-align:center}
+.ab-t .i{width:30px;height:30px;color:var(--accent);stroke-width:1.6}
+.ab-line{height:1px;background:var(--brand-m);margin:20px 0 26px}
+.ab-tx{font-size:16.5px;line-height:2.05;overflow-wrap:anywhere;white-space:pre-line}
+.ab-card.motto .ab-tx{font-size:24px;font-weight:700;text-align:center;color:var(--brand)}
+.ab-sw{text-align:center;margin-bottom:12px}
+.ab-edit{margin-top:20px;text-align:right;display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.sc-empty{color:var(--muted);text-align:center}
+.cmd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:22px}
+.cmd{position:relative;border:1px solid var(--line);border-radius:22px;padding:22px 16px 20px;text-align:center;background:#fff;display:flex;flex-direction:column;align-items:center;gap:4px}
+.cmd.now{border-color:var(--accent);box-shadow:0 8px 22px var(--sh)}
+.cmd-im{width:132px;height:160px;border-radius:18px;overflow:hidden;background:var(--brand-m);margin-bottom:10px}
+.cmd-im img{width:100%;height:100%;object-fit:cover;display:block}
+.cmd-badge{background:var(--accent);color:#fff;font-size:12px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:4px}
+.cmd-n{font-family:var(--serif);font-size:17px;line-height:1.4;color:var(--ink);overflow-wrap:anywhere}
+.cmd-p{font-size:14px;color:var(--muted);line-height:1.5}
+.cmd-t{font-size:13.5px;color:var(--brand);font-weight:600;margin-top:2px}
+.dmd-who{display:flex;align-items:center;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;text-align:left}
+.dmd-who img{width:104px;height:128px;object-fit:cover;border-radius:16px}
+.dmd-who b{display:block;font-family:var(--serif);font-size:19px;color:var(--ink)}
+.dmd-who span{display:block;color:var(--muted);font-size:14.5px}
+.sw2{display:inline-block;width:56px;height:56px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1.5px var(--line);margin:0 6px;vertical-align:middle}
+/* Footer */
+.foot{background:linear-gradient(135deg,var(--brand),var(--brand-d));color:var(--on-brand);margin-top:60px;padding-top:46px;font-size:13.5px;border-radius:44px 44px 0 0}
+.foot-g{display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1fr;gap:32px}
+.foot h4{font-size:13px;letter-spacing:.06em;margin-bottom:14px;font-weight:700;color:var(--hero-hl)}
+.foot p{opacity:.85;line-height:1.7;margin-top:12px}
+.foot .fname{font-family:var(--serif);font-weight:700;font-size:18px;line-height:1.3}
+.foot .fl{display:block;color:inherit;opacity:.88;background:none;border:0;padding:0;margin-bottom:9px;cursor:pointer;text-align:left;font-size:13.5px}
+.foot .fl:hover{opacity:1;color:var(--hero-hl)}
+.fl2{display:flex;gap:8px;opacity:.9;margin-bottom:10px;line-height:1.5;overflow-wrap:anywhere}
+.foot-b{border-top:1px solid rgba(255,255,255,.18);margin-top:34px;padding:16px 0;font-size:12.5px;opacity:.85}
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:18px}
+.stat{border-radius:var(--radius);padding:18px 20px;display:flex;align-items:center;gap:16px;border:1px solid rgba(255,255,255,.8)}
+.stat .ic{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;color:#fff;flex:0 0 58px}
+.stat .ic .i{width:26px;height:26px}
+.stat b{display:block;font-size:34px;line-height:1.1}.stat strong{display:block;font-size:16px}.stat span{display:block;font-size:13px;opacity:.7}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:10px 12px}
+.kv dt{color:var(--muted);font-weight:500}.kv dd{margin:0;font-weight:500;overflow-wrap:anywhere}
+.seg{display:inline-flex;background:var(--brand-l);border-radius:999px;padding:3px;flex-wrap:wrap}
+.seg button{border:0;background:transparent;padding:6px 14px;border-radius:999px;cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:6px;font-weight:600}
+.seg button.on{background:linear-gradient(135deg,var(--btn-2),var(--btn));color:var(--btn-text)}
+.cls-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.cls{border:1px solid var(--line);border-radius:18px;padding:16px;background:#fbfdff}
+.cls h4{font-size:17px;margin-bottom:6px}.cls .big{font-size:34px;font-weight:700;line-height:1.1;margin:8px 0}
+.cls .mw{display:flex;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:8px}
+.s1{background:#ece4ff}.s1 .ic{background:#6d4bd1}.s2{background:#ffe3ee}.s2 .ic{background:#d6407a}
+.s3{background:#e0f5e4}.s3 .ic{background:#2f9e54}.s4{background:#ffeccf}.s4 .ic{background:#e07a12}
+.s5{background:#dcecff}.s5 .ic{background:#1f6fd6}.s6{background:#d8f6ee}.s6 .ic{background:#10977a}
+/* Carousel */
+.car{position:relative;border-radius:18px;overflow:hidden;background:#e8f0ff;aspect-ratio:16/9;max-height:70vh;width:100%;box-shadow:0 8px 20px var(--sh)}
+.car .slide{position:absolute;inset:0;opacity:0;transition:opacity .5s;display:flex;align-items:center;justify-content:center}
+.car .slide.on{opacity:1}
+.car .slide{cursor:zoom-in}
+.car .slide img{width:100%;height:100%;object-fit:contain}
+.car .cap{position:absolute;left:0;right:0;bottom:0;padding:26px 20px 14px;color:#fff;background:linear-gradient(0deg,rgba(10,30,90,.6),transparent);font-weight:600}
+.car .nv{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:2px solid #fff;background:rgba(255,255,255,.9);color:var(--brand);box-shadow:0 6px 16px rgba(18,50,143,.25);cursor:pointer;font-size:18px;z-index:2}
+.car .prv{left:12px}.car .nx{right:12px}
+.dots{position:absolute;bottom:10px;right:16px;display:flex;gap:6px}
+.dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.6)}.dots i.on{background:#fff;width:22px;border-radius:9px}
+.sec-h{display:flex;justify-content:space-between;align-items:center;margin:26px 0 12px}
+.sec-h h3{font-size:19px}
+/* Org chart (pastel per unit) */
+.org-filter{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.org-unit{--c-bd:#f6b98a;--c-bg:#fff5ec;--c-tint:#fde1c8;--c-ink:#b4540f;background:rgba(255,255,255,.88);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 14px 28px;text-align:center}
+.org-unit>h3{margin-bottom:0}
+.org-unit>h3 span{display:inline-flex;align-items:center;gap:10px;background:var(--c-bg);border:1.5px solid var(--c-bd);color:var(--c-ink);border-radius:999px;padding:7px 22px;font-size:16.5px;font-weight:700}
+.org-unit>h3 span .i{width:1em;height:1em}
+.org-unit>h3 em{font-style:normal;font-weight:500;font-size:13px;opacity:.75}
+.tier{display:flex;flex-wrap:wrap;justify-content:center;gap:26px 22px;position:relative;margin-top:30px}
+.tier::before{content:"";position:absolute;top:-30px;left:50%;height:26px;border-left:2px solid var(--c-bd)}
+.pc{width:190px;display:flex;flex-direction:column;align-items:center}
+.pc img{width:124px;height:124px;border-radius:50%;object-fit:cover;background:var(--c-bg);border:5px solid var(--c-bd);margin-bottom:10px;box-shadow:0 6px 16px rgba(0,0,0,.08)}
+.pc.head img{width:148px;height:148px;border-width:6px}
+.pc.member img{width:112px;height:112px;border-width:4px}
+.pc .rb{display:inline-block;padding:1px 14px;border-radius:999px;font-size:13px;font-weight:700;background:var(--c-tint);color:var(--c-ink);margin-bottom:6px}
+.pc.head .rb{background:var(--c-bd);color:#fff}
+.pc b{display:block;font-size:16px;line-height:1.3}
+.pc .ps{display:block;color:var(--c-ink);font-size:13.5px;margin-top:2px}
+.pc .ps2{display:block;color:var(--muted);font-size:12.5px}
+.pc .ph{display:inline-flex;align-items:center;gap:5px;color:var(--c-ink);font-size:13px;margin-top:6px;font-variant-numeric:tabular-nums}
+.pc .ph .i{width:1em;height:1em}
+.pc .acts{margin-top:8px;display:flex;gap:6px;justify-content:center}
+.org-stem{height:30px;width:0;border-left:2px solid #f6b98a;margin:0 auto}
+.org-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:18px;align-items:start}
+/* Tables */
+.tw{overflow-x:auto;border-radius:16px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;min-width:480px}
+th{background:var(--brand-l);text-align:left;padding:11px 14px;font-weight:600;font-size:13.5px}
+td{padding:11px 14px;border-top:1px solid var(--line)}
+tr:hover td{background:#f6f9ff}
+td.num,th.num{text-align:right}
+.bar{height:10px;border-radius:9px;background:var(--brand-l);overflow:hidden;display:flex}
+.bar i{display:block;height:100%}.bar .m{background:#4ba3ff}.bar .w{background:#ff7aa8}
+/* Gallery */
+.tabs{display:inline-flex;background:var(--brand-l);border-radius:999px;padding:4px;margin-bottom:16px}
+.tabs button{border:0;background:transparent;padding:8px 22px;border-radius:999px;cursor:pointer;font-weight:600;color:var(--muted)}
+.tabs button.on{background:linear-gradient(135deg,var(--btn-2),var(--btn));color:var(--btn-text)}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.gc{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 8px 20px var(--sh);cursor:pointer;border:0;text-align:left;padding:0;display:block;width:100%}
+.gc:hover{box-shadow:0 14px 30px rgba(29,79,216,.22)}
+.gc .im{aspect-ratio:4/3;background:var(--brand-l);position:relative}
+.gc .im img{width:100%;height:100%;object-fit:cover;display:block}
+.gc .im em{position:absolute;right:8px;top:8px;background:rgba(18,50,143,.7);color:#fff;border-radius:999px;font-style:normal;padding:1px 10px;font-size:12px}
+.gc .tx{padding:12px 14px}.gc .tx b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gc .tx small{color:var(--muted);display:block;margin-bottom:6px}
+.pager{display:flex;gap:6px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+.pager button{min-width:38px;height:38px;border-radius:50%;border:0;background:var(--brand-l);cursor:pointer;font-weight:600}
+.pager button.on{background:linear-gradient(135deg,var(--btn-2),var(--btn));color:var(--btn-text)}
+.pv-list{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.pv{position:relative;width:96px;height:96px;border-radius:14px;overflow:hidden;background:var(--brand-l);font-size:12px;display:grid;place-items:center;text-align:center;padding:4px;word-break:break-all}
+.pv img{width:100%;height:100%;object-fit:cover}
+.pv button{position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;cursor:pointer;line-height:1}
+.status{margin-top:10px;font-weight:500}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.thumbs img{width:88px;height:68px;object-fit:cover;border-radius:10px;cursor:pointer;background:var(--brand-l)}
+/* Overlays */
+.ov{position:fixed;inset:0;background:rgba(10,28,80,.5);display:none;align-items:center;justify-content:center;padding:16px;z-index:100}
+.ov.show{display:flex}
+.modal{background:#fff;border-radius:26px;width:100%;max-width:560px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(10,28,80,.3)}
+.modal.wide{max-width:760px}
+.modal header{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.modal header h3{font-size:18px}
+.modal header button{border:0;background:var(--brand-l);color:var(--brand);width:34px;height:34px;border-radius:50%;cursor:pointer}
+.modal .bd{padding:20px 22px;overflow-y:auto}
+.modal footer{padding:14px 22px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+#loading{z-index:300;background:rgba(255,255,255,.65);flex-direction:column;gap:12px;font-weight:600}
+.spin{width:46px;height:46px;border-radius:50%;border:5px solid var(--brand-m);border-top-color:var(--brand);animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+#toasts{position:fixed;top:16px;right:16px;display:flex;flex-direction:column;gap:8px;z-index:400}
+.toast{background:#16324f;color:#fff;padding:12px 18px;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,.25);max-width:340px}
+.toast.ok{background:#17803d}.toast.err{background:#c0283a}
+#lb{z-index:200;background:rgba(5,15,40,.92);flex-direction:column;color:#fff}
+#lb img{max-width:92vw;max-height:76vh;object-fit:contain;border-radius:8px}
+#lb .nv{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.9);cursor:pointer;font-size:20px}
+#lb .prv{left:14px}#lb .nx{right:14px}
+#lb .x{position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:50%;border:0;background:#fff;cursor:pointer;font-size:18px}
+#lb p{margin-top:10px;text-align:center}
+#lb a{color:#9bd0ff}
+/* Settings */
+.presets{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.presets button.sw{width:34px;height:34px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--line);cursor:pointer}
+input[type=color]{width:56px;height:40px;border:1.5px solid var(--line);border-radius:12px;padding:3px;background:#fff;cursor:pointer}
+.prev-img{width:64px;height:64px;border-radius:14px;object-fit:contain;background:var(--brand-l);border:1px solid var(--line)}
+.set-sec{margin-bottom:18px}.set-sec h3{margin-bottom:14px;font-size:18px}
+.mini{border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.mini-h{background:#fff;padding:8px 12px;font-weight:700;color:var(--brand);font-family:var(--serif);display:flex;justify-content:space-between}
+.mini-hero{background:linear-gradient(90deg,var(--brand-d),var(--brand));color:#fff;padding:20px 14px;font-family:var(--serif);font-weight:700;font-size:18px;line-height:1.3}
+.mini-hero span{color:var(--hero-hl);display:block}
+.mini-body{background:var(--bg);padding:12px;display:flex;gap:8px;align-items:center}
+.print-only{display:none}
+.hexin{width:120px!important;font-variant-numeric:tabular-nums}
+a.btn{text-decoration:none}
+/* จัดการรายการ (กลุ่มงาน / กลุ่มสาระ / สายงาน) */
+.ml-row{display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:14px;background:#fbfdff;margin-bottom:8px}
+.ml-row b{flex:1;min-width:0;font-weight:600;overflow-wrap:anywhere}
+.lbl-add{margin-left:8px;vertical-align:middle}
+/* หน้าเอกสารดาวน์โหลด */
+.dc-head{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.dc-head h2{font-family:var(--serif);font-weight:800;font-size:clamp(24px,3.2vw,38px);color:var(--brand-d);line-height:1.3}
+.dc-filters{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.dc-filters select{width:auto;min-width:190px;border-radius:999px;padding:12px 16px;font-weight:600}
+.dc-filters .ab-search{min-width:260px;border-radius:999px;background:#fff}
+.dc-card{margin-top:26px;background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.95);border-radius:26px;box-shadow:var(--shadow);overflow:hidden}
+.dc-top{padding:18px 28px;background:var(--brand-l);color:var(--brand);font-weight:700;font-size:14.5px}
+.dc-row{display:flex;align-items:center;gap:20px;padding:22px 28px;border-top:1px solid var(--line)}
+.dc-top+.dc-row{border-top:0}
+.dc-ic{width:64px;height:64px;border-radius:18px;background:#fdeeee;color:#c62828;display:grid;place-items:center;flex:0 0 64px;box-shadow:0 3px 10px rgba(198,40,40,.12)}
+.dc-ic.lnk{background:#e4eeff;color:#2563eb;box-shadow:0 3px 10px rgba(37,99,235,.12)}
+.dc-ic .i{width:30px;height:30px}
+.dc-main{flex:1;min-width:0}
+.dc-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:6px;font-size:13px;color:var(--muted)}
+.dc-code{background:var(--brand-l);color:var(--brand);border-radius:8px;padding:2px 12px;font-weight:700;font-size:13px}
+.dc-t{display:block;font-size:19px;line-height:1.4;overflow-wrap:anywhere}
+.dc-act{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.dc-file{font-size:13px;color:var(--muted);margin-top:6px;overflow-wrap:anywhere}
+/* หน้าติดต่อเรา */
+.ct-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:24px;margin-top:24px;align-items:start}
+.ct-list{display:flex;flex-direction:column;gap:14px;min-width:0}
+.ct-item{display:flex;align-items:center;gap:16px;padding:16px 18px;background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.95);border-radius:22px;box-shadow:0 8px 20px var(--sh);color:var(--ink);text-decoration:none;transition:border-color .15s,transform .15s}
+a.ct-item:hover{border-color:var(--accent);transform:translateY(-2px)}
+.ct-ic{width:48px;height:48px;border-radius:15px;background:var(--brand-l);color:var(--brand);display:grid;place-items:center;flex:0 0 48px}
+.ct-ic.line{background:#e3f7e8;color:#06a94d}.ct-ic.fb{background:#e5eefc;color:#1877f2}
+.ct-tx{min-width:0}
+.ct-tx small{display:block;color:var(--muted);font-size:12.5px}
+.ct-tx b{display:block;font-weight:600;overflow-wrap:anywhere;white-space:pre-line}
+.map-box{height:420px;background:var(--brand-l);position:relative;isolation:isolate}
+.map-box.pick{height:340px;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.map-act{display:flex;gap:10px;flex-wrap:wrap;padding:14px 18px;border-top:1px solid var(--line)}
+.map-hint{font-size:13px;color:var(--muted);margin:8px 0 12px}
+@media (max-width:1480px){
+  .hnav{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:0;border-radius:0 0 26px 26px;padding:8px 28px 16px;box-shadow:0 14px 24px rgba(18,50,143,.14);flex-direction:column;align-items:stretch;gap:2px;margin:0}
+  .hnav.open{display:flex}
+  .hnav button{padding:12px 16px;text-align:left;border-radius:14px}
+  .hdr-r{margin-left:auto}
+  .tb-menu{display:grid}
+}
+@media (max-width:1000px){
+  .home3{grid-template-columns:1fr}
+  .ct-grid{grid-template-columns:1fr}
+  .dir-im{aspect-ratio:4/3}
+}
+@media (max-width:900px){
+  .wrap{padding:0 18px}
+  .hnav{padding:8px 18px 16px}
+  .foot-g{grid-template-columns:repeat(2,1fr)}
+  .grid2{grid-template-columns:1fr}
+  .car .nv{width:38px;height:38px}
+  .hero2{min-height:0;border-radius:0 0 30px 30px}
+  .hero-in{min-height:340px}
+  .hnv{display:none}
+  .hero2 .art{display:none}
+  .ab-card{padding:26px 20px 28px}
+  .ab-wrap{padding:16px}
+  .foot{border-radius:30px 30px 0 0}
+}
+@media (max-width:600px){
+  .tier{gap:20px 8px}.pc{width:calc(50% - 8px)}.pc img{width:96px;height:96px}.pc.head img{width:116px;height:116px}.pc.member img{width:90px;height:90px}
+  .logo-b small{display:none}
+  .logo-b b{font-size:16px;white-space:normal}
+  .hdr-r .adm span{display:none}
+  .ab-t .i{display:none}
+  .dc-row{flex-wrap:wrap;padding:18px}
+  .dc-act{width:100%;justify-content:flex-start}
+  .dc-top{padding:14px 18px}
+  .map-box{height:320px}
+}
+@media print{
+  .hdr,.topbar,.no-print,.foot,#toasts{display:none!important}
+  .print-only{display:block;text-align:center;margin:8px 0}
+  body{background:#fff}body::before{display:none}.card{box-shadow:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="hdr no-print">
+  <div class="wrap">
+    <button class="logo-b" data-act="nav" data-p="home" aria-label="หน้าหลัก"><span class="lgc" id="hLogo"></span><span><b id="hName">เว็บไซต์โรงพยาบาลกองบิน 5</b><small id="hOrg"></small></span></button>
+    <nav class="hnav" id="hnav"></nav>
+    <div class="hdr-r" id="hdrR"></div>
+  </div>
+</header>
+<main id="view"></main>
+<footer class="foot no-print" id="foot"></footer>
+
+<div class="ov" id="modalOv"><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
+<div class="ov" id="lb"></div>
+<div class="ov" id="loading"><div class="spin"></div><div id="loadMsg">กำลังดำเนินการ...</div></div>
+<div id="toasts"></div>
+
+<script>
+(function () {
+'use strict';
+
+/* ===== Utilities ===== */
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const PH = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="100%" height="100%" fill="#e3ebf8"/><text x="50%" y="52%" text-anchor="middle" fill="#8a9fc4" font-size="22" font-family="sans-serif">ไม่มีรูปภาพ</text></svg>');
+/* สีเริ่มต้นของดีไซน์ใหม่ (primary = สีเน้น/ทอง, sidebar = สีหลัก/เขียว) */
+const DEF = { primary: '#3b9bff', sidebar: '#1d4fd8', bg: '#eaf3ff', btn: '#1d4fd8' };
+/* ค่าเริ่มต้นเดิมสีฟ้า: ถือว่ายังไม่เคยปรับแต่ง และใช้ชุดสีใหม่แทน */
+const LEG = { primary: ['#2f8cff', '#e0a52b'], sidebar: ['#eef6ff', '#0f4a38'], bg: ['#e3f1ff', '#f7f5ef'] };
+const col = (v, k) => { v = String(v || '').trim().toLowerCase(); return (!v || LEG[k].indexOf(v) >= 0) ? DEF[k] : v; };
+const TYPES = ['กิจกรรมบริการประชาชน', 'กิจกรรมพัฒนาบุคลากร', 'กิจกรรมวิชาการ', 'กิจกรรมสร้างเสริมสุขภาพ', 'กิจกรรมจิตอาสาและชุมชน', 'อื่น ๆ'];
+const CATS = ['ด้านการรักษาพยาบาล', 'ด้านส่งเสริมสุขภาพและป้องกันโรค', 'ด้านการฟื้นฟูสมรรถภาพ', 'ด้านวิชาการและการเรียนรู้', 'ด้านชุมชนและสิ่งแวดล้อม', 'อื่น ๆ'];
+/* รายการเริ่มต้น (ผู้ดูแลเพิ่ม/ลบ/จัดลำดับเองได้ — เก็บใน Settings) */
+const DEPTS0 = ['ผู้บริหาร', 'กลุ่มงานการพยาบาล', 'กลุ่มงานเวชกรรม', 'กลุ่มงานทันตกรรม', 'กลุ่มงานเภสัชกรรม', 'กลุ่มงานเทคนิคการแพทย์และรังสี', 'กลุ่มงานสนับสนุนบริการ', 'กลุ่มงานอำนวยการ'];
+const GROUPS0 = ['ผู้ป่วยนอก', 'ผู้ป่วยใน', 'ห้องฉุกเฉิน', 'ห้องผ่าตัด', 'ห้องคลอด', 'ห้องปฏิบัติการ', 'เภสัชกรรม', 'เวชระเบียน'];
+const DIVS0 = ['สายแพทย์', 'สายพยาบาล', 'สายสนับสนุนวิชาชีพ', 'สายบริหารและสนับสนุน'];
+const DOC_DEPTS0 = ['กลุ่มงานการพยาบาล', 'กลุ่มงานเวชกรรม', 'กลุ่มงานเภสัชกรรม', 'กลุ่มงานการเงินและพัสดุ', 'กลุ่มงานบุคคล', 'กลุ่มงานอำนวยการ', 'อื่น ๆ'];
+let DEPTS = DEPTS0.slice(), GROUPS = GROUPS0.slice(), DIVS = DIVS0.slice(), DOC_DEPTS = DOC_DEPTS0.slice();
+const ROLES = [['head', 'หัวหน้า'], ['deputy', 'รองหัวหน้า'], ['member', 'บุคลากรทั่วไป']];
+const RL = { head: 'หัวหน้า', deputy: 'รองหัวหน้า', member: 'บุคลากร' };
+const PRESETS = ['#1d4fd8', '#2563eb', '#0b3d91', '#0ea5e9', '#0f766e', '#7c3aed', '#0f172a'];
+const PAGE_SIZE = 12;
+const HOME_AWARDS = 6;
+const HC_MAX = 10; /* จำนวนรายการสูงสุดในสไลด์ข่าวประชาสัมพันธ์ / ภาพกิจกรรม ที่หน้าหลัก */
+const IC = {
+  home: '<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+  users: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.8 0 4.5 1.9 4.5 5"/>',
+  student: '<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5"/>',
+  image: '<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="1.8"/><path d="M21 16l-5-5L5 21"/>',
+  pin: '<path d="M12 21s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+  settings: '<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>',
+  lock: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',
+  logout: '<path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/>',
+  menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
+  cal: '<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  grid: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  list: '<path d="M8 6h13M8 12h13M8 18h13"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/>',
+  building: '<path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/>',
+  spark: '<path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/>',
+  phone: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/>',
+  history: '<path d="M4 5a2 2 0 012-2h12v16H6a2 2 0 00-2 2z"/><path d="M4 21V5"/><path d="M9 7h6M9 11h6"/>',
+  palette: '<path d="M12 3a9 9 0 100 18c1.5 0 2-1 1.5-2-.6-1.2.2-2.5 1.6-2.5H17a4 4 0 004-4c0-5-4-9.5-9-9.5z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/>',
+  quote: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/>',
+  star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+  eye: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',
+  compass: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+  flag: '<path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h0"/>',
+  news: '<rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="M8 9h8M8 13h8M8 17h5"/>',
+  bell: '<path d="M6 17V11a6 6 0 0112 0v6l2 2H4z"/><path d="M10 21h4"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 3 3 15 0 18"/><path d="M12 3c-3 3-3 15 0 18"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+  arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  chevl: '<path d="M15 5l-7 7 7 7"/>',
+  chevr: '<path d="M9 5l7 7-7 7"/>',
+  file: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>',
+  download: '<path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>',
+  mail: '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 7l9 6 9-6"/>',
+  chat: '<path d="M4 5h16v11H9l-5 4z"/><circle cx="9" cy="10.5" r=".8"/><circle cx="12" cy="10.5" r=".8"/><circle cx="15" cy="10.5" r=".8"/>',
+  fb: '<path d="M15 3h-2.5A3.5 3.5 0 009 6.5V9H6v4h3v8h4v-8h3l1-4h-4V6.5c0-.3.2-.5.5-.5H15z"/>'
+};
+const ico = (n, c) => '<svg class="i' + (c ? ' ' + c : '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + IC[n] + '</svg>';
+const NAV = [
+  ['home', 'home', 'หน้าหลัก'], ['school', 'info', 'ข้อมูลโรงพยาบาล'], ['news', 'news', 'ข่าวสาร & ประกาศ'],
+  ['docs', 'file', 'เอกสารดาวน์โหลด'], ['staff', 'users', 'บุคลากร'],
+  ['activities', 'image', 'ภาพกิจกรรม'], ['campus', 'pin', 'ภาพบรรยากาศ'], ['contact', 'phone', 'ติดต่อเรา']
+];
+const LIST = { cmd: 'commanders', staff: 'staff', campus: 'campus', banner: 'banners', link: 'links', award: 'awards', pr: 'pr', doc: 'docs' };
+/* หัวข้อในหน้าข้อมูลโรงพยาบาล: [คีย์, ไอคอน, ชื่อ] */
+const SCH = [
+  ['history', 'history', 'ประวัติโรงพยาบาล'], ['commanders', 'users', 'ทำเนียบผู้บังคับบัญชา'], ['motto', 'quote', 'คำขวัญ'], ['colors', 'palette', 'สีประจำหน่วย'],
+  ['vision', 'eye', 'วิสัยทัศน์'], ['mission', 'compass', 'พันธกิจ'], ['goals', 'target', 'เป้าหมาย'],
+  ['dmdPolicy', 'flag', 'นโยบายเจ้ากรมแพทย์ทหารอากาศ'], ['policy', 'flag', 'นโยบายโรงพยาบาล'], ['identity', 'star', 'อัตลักษณ์']
+];
+
+const S = {
+  settings: {}, commanders: [], staff: [], students: [], campus: [], banners: [], records: [], links: [], awards: [], pr: [], docs: [],
+  hc: { pr: 0, act: 0 }, prTimer: null, prPause: false,
+  dq: { q: '', dept: '' }, docUp: null, map: null, mapSet: null, mapClear: null, ml: null,
+  admin: false, pwd: '', page: 'home', car: 0, carTimer: null, hero: 0, heroTimer: null, loaded: false,
+  gal: { q: '', type: '', cat: '', year: '', from: '', to: '', sort: 'desc', page: 1 },
+  sf: { year: '', level: '' }, tab: 'gallery', org: { mode: 'all', val: '' }, sch: { tab: 'history', q: '' },
+  form: { id: '', newImages: [], newDocs: [], oldImages: [], oldDocs: [] }, lb: null, busy: false
+};
+
+/* ===== รายการที่ผู้ดูแลปรับแต่งได้: กลุ่มงาน / กลุ่มสาระ / สายงาน / กลุ่มงานของเอกสาร ===== */
+const LISTCFG = {
+  dept:    { key: 'deptList',    title: 'กลุ่มงาน',                   field: 'Dept',     none: false, get: () => DEPTS.slice() },
+  group:   { key: 'groupList',   title: 'แผนก/หน่วยงาน',        field: 'Group',    none: true,  get: () => GROUPS.slice() },
+  div:     { key: 'divList',     title: 'สายงาน',     field: 'Division', none: true,  get: () => DIVS.slice() },
+  docdept: { key: 'docDeptList', title: 'กลุ่มงานของเอกสาร',          field: 'Dept',     none: true,  get: () => DOC_DEPTS.slice() }
+};
+function loadLists() {
+  const rd = (key, def) => {
+    try {
+      const v = JSON.parse(S.settings[key] || '[]');
+      const a = Array.isArray(v) ? v.map(x => String(x).trim()).filter(Boolean) : [];
+      return a.length ? a : def.slice();
+    } catch (e) { return def.slice(); }
+  };
+  DEPTS = rd('deptList', DEPTS0); GROUPS = rd('groupList', GROUPS0); DIVS = rd('divList', DIVS0); DOC_DEPTS = rd('docDeptList', DOC_DEPTS0);
+}
+function selOptions(k, val) {
+  const l = LISTCFG[k].get();
+  if (val && l.indexOf(val) < 0) l.push(val); // คงค่าเดิมของข้อมูลเก่า
+  return (LISTCFG[k].none ? '<option value="">ไม่ระบุ</option>' : '') +
+    l.map(x => '<option value="' + esc(x) + '"' + (x === val ? ' selected' : '') + '>' + esc(x) + '</option>').join('');
+}
+function persistList(k, arr, after) {
+  api('saveSettings', [{ [LISTCFG[k].key]: JSON.stringify(arr) }, S.pwd], 'กำลังบันทึก...').then(r => {
+    if (!check(r)) return;
+    S.settings = r.settings || S.settings; loadLists();
+    if (after) after(r);
+  }).catch(() => {});
+}
+/* เพิ่มรายการใหม่ด่วนจากในหน้าต่างเพิ่ม/แก้ไข (บุคลากร / เอกสาร) */
+function quickAdd(k) {
+  const cfg = LISTCFG[k];
+  const name = String(prompt('เพิ่ม' + cfg.title + 'ใหม่ (พิมพ์ชื่อ):') || '').trim();
+  if (!name) return;
+  const cur = cfg.get();
+  const fill = () => { const el = $('[data-it="' + cfg.field + '"]'); if (el) el.innerHTML = selOptions(k, name); };
+  if (cur.indexOf(name) >= 0) { fill(); toast('มีรายการนี้อยู่แล้ว (เลือกให้แล้ว)', ''); return; }
+  persistList(k, cur.concat([name]), () => { fill(); toast('เพิ่ม' + cfg.title + 'สำเร็จ', 'ok'); });
+}
+/* หน้าต่างจัดการรายการ: เพิ่ม / ลบ / เลื่อนลำดับ */
+function manageList(k) {
+  S.ml = { k: k, items: LISTCFG[k].get() };
+  openModal('จัดการ' + LISTCFG[k].title,
+    '<div class="field"><label class="f">เพิ่มรายการใหม่</label><div class="row" style="flex-wrap:nowrap"><input type="text" id="mlIn" maxlength="100" placeholder="พิมพ์ชื่อ แล้วกด Enter หรือปุ่มเพิ่ม" autocomplete="off"><button class="btn sm" type="button" data-act="mladd" style="flex:0 0 auto">+ เพิ่ม</button></div></div>' +
+    '<div id="mlBody"></div>' +
+    '<p class="map-hint">การลบรายการจะไม่ลบข้อมูลบุคลากร/เอกสารที่เคยใช้รายการนั้น (ยังแสดงผลตามเดิม) · หากลบทั้งหมด ระบบจะกลับไปใช้รายการเริ่มต้น</p>',
+    '<button class="btn ghost" data-act="close">ยกเลิก</button><button class="btn" data-act="mlsave">บันทึก</button>');
+  drawML();
+  setTimeout(() => { const e = $('#mlIn'); if (e) e.focus(); }, 50);
+}
+function drawML() {
+  const b = $('#mlBody'); if (!b || !S.ml) return;
+  const a = S.ml.items, n = a.length;
+  b.innerHTML = n ? a.map((x, i) => '<div class="ml-row"><b>' + esc(x) + '</b>' +
+    '<button class="btn ghost sm" type="button" data-act="mlup" data-i="' + i + '" aria-label="เลื่อนขึ้น"' + (i === 0 ? ' disabled' : '') + '>▲</button>' +
+    '<button class="btn ghost sm" type="button" data-act="mldown" data-i="' + i + '" aria-label="เลื่อนลง"' + (i === n - 1 ? ' disabled' : '') + '>▼</button>' +
+    '<button class="btn danger sm" type="button" data-act="mldel" data-i="' + i + '">ลบ</button></div>').join('') : '<p class="sc-empty">ยังไม่มีรายการ (จะใช้ค่าเริ่มต้นของระบบ)</p>';
+}
+function mlAdd() {
+  const e = $('#mlIn'); if (!e || !S.ml) return;
+  const v = e.value.trim();
+  if (!v) { toast('กรุณาพิมพ์ชื่อรายการ', 'err'); return; }
+  if (S.ml.items.indexOf(v) >= 0) { toast('มีรายการนี้อยู่แล้ว', 'err'); return; }
+  S.ml.items.push(v); e.value = ''; drawML(); e.focus();
+}
+function mlMove(i, d) {
+  const a = S.ml.items, j = i + d;
+  if (j < 0 || j >= a.length) return;
+  const t = a[i]; a[i] = a[j]; a[j] = t; drawML();
+}
+function mlSave() {
+  const k = S.ml.k;
+  persistList(k, S.ml.items, () => { closeModal(); toast('บันทึก' + LISTCFG[k].title + 'สำเร็จ', 'ok'); render(); });
+}
+
+function safeUrl(u) {
+  u = String(u || '').trim();
+  if (!u) return '';
+  const m = u.match(/drive\.google\.com\/file\/d\/([\w-]+)/) || u.match(/drive\.google\.com\/(?:open|uc)\?(?:[^#]*&)?id=([\w-]+)/);
+  if (m) return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w1600';
+  if (/^https?:\/\//i.test(u) || /^data:image\//i.test(u)) return u;
+  return '';
+}
+function cssUrl(u) { return String(u).replace(/['"()\\\s]/g, c => '%' + c.charCodeAt(0).toString(16)); }
+function thumb(id, w) { return 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(id) + '&sz=w' + (w || 800); }
+function viewUrl(id) { return 'https://drive.google.com/file/d/' + encodeURIComponent(id) + '/view'; }
+function parseJ(s) { try { const v = JSON.parse(s || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; } }
+function fmtDate(s) {
+  if (!s) return '';
+  const d = new Date(String(s).slice(0, 10) + 'T00:00:00');
+  return isNaN(d) ? esc(s) : d.toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+function img(src, alt, cls) { return '<img ' + (cls ? 'class="' + cls + '" ' : '') + 'src="' + esc(safeUrl(src) || PH) + '" alt="' + esc(alt || '') + '" loading="lazy">'; }
+document.addEventListener('error', e => {
+  const t = e.target;
+  if (t && t.tagName === 'IMG' && t.src !== PH && !t.dataset.fb) { t.dataset.fb = '1'; t.src = PH; }
+}, true);
+
+/* ===== Backend ===== */
+let loadCount = 0;
+function loading(on, msg) {
+  loadCount = on ? loadCount + 1 : Math.max(0, loadCount - 1);
+  $('#loadMsg').textContent = msg || 'กำลังดำเนินการ...';
+  $('#loading').classList.toggle('show', loadCount > 0);
+}
+/* เรียกฝั่งเซิร์ฟเวอร์ได้ 2 โหมด:
+   1) เปิดจาก Apps Script โดยตรง -> google.script.run
+   2) โฮสต์บน GitHub Pages -> fetch ไปที่ Web App (API_URL ใน config.js) */
+const API_URL = ((window.APP_CONFIG || {}).API_URL || '').trim();
+function rawCall(fn, args) {
+  if (window.google && google.script && google.script.run) {
+    return new Promise((resolve, reject) => {
+      const r = google.script.run.withSuccessHandler(resolve).withFailureHandler(reject);
+      try { r[fn].apply(r, args); } catch (e) { reject(e); }
+    });
+  }
+  if (!API_URL) return Promise.reject(new Error('ยังไม่ได้ตั้งค่า API_URL ในไฟล์ config.js'));
+  return fetch(API_URL, {
+    method: 'POST', redirect: 'follow',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, /* text/plain = ไม่ต้องทำ CORS preflight */
+    body: JSON.stringify({ fn: fn, args: args })
+  }).then(r => { if (!r.ok) throw new Error('เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ (' + r.status + ')'); return r.json(); })
+    .then(res => { if (res && res.error) throw new Error(res.error); return res ? res.result : undefined; });
+}
+function api(fn, args, msg) {
+  return new Promise((resolve, reject) => {
+    loading(true, msg);
+    rawCall(fn, args || []).then(res => { loading(false); resolve(res); })
+      .catch(err => { loading(false); toast((err && err.message) || 'เกิดข้อผิดพลาด', 'err'); reject(err); });
+  });
+}
+function toast(msg, kind) {
+  const el = document.createElement('div');
+  el.className = 'toast ' + (kind || '');
+  el.textContent = msg;
+  $('#toasts').appendChild(el);
+  setTimeout(() => el.remove(), 3800);
+}
+/* ตรวจผลลัพธ์ที่มี ok/msg; ถ้าผิดรหัสให้ออกจากโหมดผู้ดูแล */
+function check(r) {
+  if (r && r.ok) return true;
+  toast((r && r.msg) || 'เกิดข้อผิดพลาด', 'err');
+  if (r && r.msg === 'รหัสผู้ดูแลระบบไม่ถูกต้อง') logout(true);
+  return false;
+}
+
+/* ===== Theme ===== */
+function lum(hex) {
+  let h = String(hex || '#ffffff').replace('#', '');
+  if (h.length === 3) h = h.split('').map(x => x + x).join('');
+  const f = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+  return 0.2126 * f(parseInt(h.substr(0, 2), 16)) + 0.7152 * f(parseInt(h.substr(2, 2), 16)) + 0.0722 * f(parseInt(h.substr(4, 2), 16));
+}
+function mix(h1, h2, k) {
+  const g = h => { h = h.replace('#', ''); return [0, 2, 4].map(i => parseInt(h.substr(i, 2), 16)); };
+  const x = g(h1), y = g(h2);
+  return '#' + x.map((v, i) => Math.round(v * (1 - k) + y[i] * k).toString(16).padStart(2, '0')).join('');
+}
+function rgba(hex, a) {
+  const h = hex.replace('#', '');
+  return 'rgba(' + [0, 2, 4].map(i => parseInt(h.substr(i, 2), 16)).join(',') + ',' + a + ')';
+}
+/* primary = สีเน้น (ทอง), sidebar = สีหลัก (หัวข้อ/ส่วนท้าย/ปุ่ม), bg = พื้นหลัง */
+function applyTheme(c) {
+  const ok = (v, d) => /^#[0-9a-f]{6}$/i.test(v) ? v : d;
+  const accent = ok(c.primary, DEF.primary), brand = ok(c.sidebar, DEF.sidebar), bg = ok(c.bg, DEF.bg);
+  const st = document.documentElement.style;
+  const set = (k, v) => st.setProperty(k, v);
+  const onB = lum(brand) > 0.5 ? '#0f172a' : '#ffffff', onA = lum(accent) > 0.5 ? '#1a1405' : '#ffffff';
+  set('--brand', brand); set('--brand-d', mix(brand, '#000000', 0.28)); set('--brand-2', mix(brand, '#ffffff', 0.22));
+  set('--brand-l', mix(brand, '#ffffff', 0.92)); set('--brand-m', mix(brand, '#ffffff', 0.8));
+  set('--on-brand', onB);
+  set('--accent', accent); set('--accent-d', mix(accent, '#000000', 0.22)); set('--on-accent', onA);
+  set('--hero-hl', mix(accent, '#ffffff', 0.45));
+  set('--primary', brand); set('--primary-text', onB);
+  set('--btn', brand); set('--btn-2', mix(brand, '#ffffff', 0.22)); set('--btn-text', onB);
+  set('--sh', rgba(brand, 0.14)); set('--shadow', '0 10px 30px ' + rgba(brand, 0.12));
+  set('--bg', bg); set('--bg2', mix(bg, '#ffffff', 0.6));
+  set('--hero-a', mix(brand, '#ffffff', 0.8));
+  const hb = mix(bg, '#ffffff', 0.55);
+  set('--hero-ov1', rgba(hb, 0.95)); set('--hero-ov2', rgba(hb, 0));
+}
+function applySaved() { applyTheme({ primary: col(S.settings.primaryColor, 'primary'), sidebar: col(S.settings.sidebarColor, 'sidebar'), bg: col(S.settings.bgColor, 'bg') }); }
+function liveTheme() { applyTheme({ primary: $('#cPrimary').value, sidebar: $('#cSidebar').value, bg: $('#cBg').value }); }
+
+/* ===== Modal / Lightbox ===== */
+function openModal(title, body, footer, wide) {
+  $('#modal').className = 'modal' + (wide ? ' wide' : '');
+  $('#modal').innerHTML = '<header><h3>' + esc(title) + '</h3><button data-act="close" aria-label="ปิด">✕</button></header><div class="bd">' + body + '</div>' + (footer ? '<footer>' + footer + '</footer>' : '');
+  $('#modalOv').classList.add('show');
+}
+function closeModal() { $('#modalOv').classList.remove('show'); $('#modal').innerHTML = ''; }
+function openLb(items, i) { S.lb = { items: items, i: i }; drawLb(); $('#lb').classList.add('show'); }
+function drawLb() {
+  const it = S.lb.items[S.lb.i];
+  $('#lb').innerHTML = '<button class="x" data-act="lbclose" aria-label="ปิด">✕</button>' +
+    (S.lb.items.length > 1 ? '<button class="nv prv" data-act="lbprev" aria-label="ก่อนหน้า">◀</button><button class="nv nx" data-act="lbnext" aria-label="ถัดไป">▶</button>' : '') +
+    '<img src="' + esc(thumb(it.id, 1800)) + '" alt="' + esc(it.name) + '">' +
+    '<p>' + (S.lb.i + 1) + ' / ' + S.lb.items.length + ' · <a href="' + esc(viewUrl(it.id)) + '" target="_blank" rel="noopener">เปิดไฟล์ต้นฉบับใน Google Drive</a></p>';
+}
+function closeLb() { $('#lb').classList.remove('show'); $('#lb').innerHTML = ''; S.lb = null; }
+
+/* ===== Data ===== */
+function applyData(d) {
+  S.settings = d.settings || {}; S.staff = d.staff || []; S.students = d.students || [];
+  S.commanders = d.commanders || []; S.campus = d.campus || []; S.banners = d.banners || []; S.records = d.records || []; S.links = d.links || []; S.awards = d.awards || []; S.pr = d.pr || []; S.docs = d.docs || [];
+  S.loaded = true;
+  loadLists();
+  if (d.notes && d.notes.length) toast(d.notes.join(' | '), '');
+  applySaved(); renderChrome(); render();
+}
+function boot() {
+  api('getBootstrap', [], 'กำลังโหลดข้อมูล...').then(applyData).catch(() => {
+    $('#view').className = 'wrap pg';
+    $('#view').innerHTML = '<div class="card empty"><div class="big">⚠️</div><p>โหลดข้อมูลไม่สำเร็จ</p><p style="margin-top:12px"><button class="btn" data-act="retry">ลองอีกครั้ง</button></p></div>';
+  });
+}
+function latestYear() {
+  const ys = S.students.map(r => String(r.Year)).filter(Boolean);
+  if (ys.indexOf(String(S.settings.academicYear)) >= 0) return String(S.settings.academicYear);
+  return ys.sort().pop() || '';
+}
+function studentRows(year, level) {
+  return S.students.filter(r => (!year || String(r.Year) === String(year)) && (!level || r.Level === level));
+}
+const sumOf = (rows, k) => rows.reduce((a, r) => a + (Number(r[k]) || 0), 0);
+
+/* ===== Chrome (เมนู / ส่วนท้าย) ===== */
+function renderChrome() {
+  const s = S.settings;
+  const nm = s.systemName || 'เว็บไซต์โรงพยาบาลกองบิน 5';
+  const org = s.orgName || nm;
+  const lg = safeUrl(s.logoUrl);
+  const fb = esc(String(s.orgName || 'ร').replace(/^โรงพยาบาล/, '').charAt(0) || 'ร');
+  const logoHtml = lg ? img(lg, 'ตราโรงพยาบาล') : fb;
+  document.title = nm;
+  $('#hName').textContent = org;
+  $('#hOrg').textContent = s.affiliation || nm;
+  $('#hLogo').innerHTML = logoHtml;
+  $('#hnav').innerHTML = NAV.map(n => '<button data-act="nav" data-p="' + n[0] + '" class="' + (S.page === n[0] ? 'active' : '') + '">' + esc(n[2]) + '</button>').join('');
+  $('#hdrR').innerHTML = (S.admin ? '<button class="btn gold sm adm" data-act="logout">' + ico('logout') + '<span>ออกจากโหมดผู้ดูแล</span></button>' : '') +
+    '<button class="ib" data-act="search" aria-label="ค้นหากิจกรรม" title="ค้นหากิจกรรม">' + ico('search') + '</button>' +
+    '<button class="ib" data-act="nav" data-p="settings" aria-label="' + (S.admin ? 'ตั้งค่าระบบ' : 'เข้าสู่โหมดผู้ดูแล') + '" title="' + (S.admin ? 'ตั้งค่าระบบ' : 'เข้าสู่โหมดผู้ดูแล') + '">' + ico(S.admin ? 'settings' : 'lock') + '</button>' +
+    '<button class="ib tb-menu" data-act="menu" aria-label="เมนู">' + ico('menu') + '</button>';
+  $('#foot').innerHTML = '<div class="wrap"><div class="foot-g">' +
+    '<div><div class="row" style="flex-wrap:nowrap"><span class="lgc">' + logoHtml + '</span><b class="fname">' + esc(org) + '</b></div><p>' + esc(s.motto || s.affiliation || nm) + '</p></div>' +
+    '<div><h4>เมนูหลัก</h4>' + NAV.map(n => '<button class="fl" data-act="nav" data-p="' + n[0] + '">' + esc(n[2]) + '</button>').join('') + '</div>' +
+    '<div><h4>ข้อมูลติดต่อ</h4>' + (s.address ? '<span class="fl2">' + ico('pin') + esc(s.address) + '</span>' : '') +
+    (s.affiliation ? '<span class="fl2">' + ico('building') + esc(s.affiliation) + '</span>' : '') +
+    (s.phone ? '<span class="fl2">' + ico('phone') + esc(s.phone) + '</span>' : '') +
+    (s.email ? '<span class="fl2">' + ico('mail') + esc(s.email) + '</span>' : '') +
+    '<span class="fl2">' + ico('cal') + 'ปีงบประมาณ ' + esc(s.academicYear) + '</span></div>' +
+    '<div><h4>ผู้ดูแลระบบ</h4>' + (S.admin ? '<button class="fl" data-act="nav" data-p="settings">ตั้งค่าระบบ</button><button class="fl" data-act="logout">ออกจากโหมดผู้ดูแล</button>' : '<button class="btn gold sm" data-act="login">' + ico('lock') + ' เข้าสู่โหมดผู้ดูแล</button>') + '</div>' +
+    '</div><div class="foot-b">© ' + (new Date().getFullYear() + 543) + ' ' + esc(org) + ' สงวนลิขสิทธิ์</div></div>';
+}
+function go(p) {
+  if (p === 'settings' && !S.admin) { loginModal('settings'); return; }
+  if (S.page === 'settings' && p !== 'settings') applySaved();
+  S.page = p; $('#hnav').classList.remove('open');
+  renderChrome(); render(); window.scrollTo(0, 0);
+}
+
+/* ===== Page router ===== */
+function render() {
+  clearInterval(S.carTimer); clearInterval(S.heroTimer); clearInterval(S.prTimer);
+  if (S.map) { try { S.map.remove(); } catch (e) { /* ignore */ } S.map = null; S.mapSet = null; S.mapClear = null; }
+  if (!S.loaded) return;
+  const v = $('#view');
+  const fn = { home: pHome, school: pSchool, news: pNews, docs: pDocs, contact: pContact, staff: pStaff, activities: pActivities, campus: pCampus, settings: pSettings }[S.page] || pHome;
+  v.className = fn === pHome ? '' : 'wrap pg';
+  fn(v);
+}
+const adminBtn = (act, txt, extra) => S.admin ? '<button class="btn sm" data-act="' + act + '" ' + (extra || '') + '>' + txt + '</button>' : '';
+
+/* ----- Home ----- */
+function recCard(r) {
+  const ims = parseJ(r.Images);
+  return '<button class="gc" data-act="viewrec" data-id="' + esc(r.ID) + '"><div class="im">' +
+    (ims.length ? img(thumb(ims[0].id, 500), r.Title) : '<img src="' + PH + '" alt="">') +
+    (ims.length > 1 ? '<em>' + ims.length + ' ภาพ</em>' : '') + '</div><div class="tx"><b>' + esc(r.Title) + '</b><small>' +
+    fmtDate(r.StartDate) + '</small>' + (r.Type ? '<span class="chip">' + esc(r.Type) + '</span>' : '') + '</div></button>';
+}
+const SCHOOL_SVG = '<svg viewBox="0 0 240 220" aria-hidden="true"><circle cx="120" cy="112" r="104" style="fill:#fff;opacity:.7"/><path d="M120 34l-76 42h152z" style="fill:var(--primary)"/><rect x="56" y="76" width="128" height="88" rx="4" style="fill:#fff;stroke:var(--primary);stroke-width:5"/><rect x="72" y="92" width="26" height="26" rx="4" style="fill:var(--hero-a)"/><rect x="142" y="92" width="26" height="26" rx="4" style="fill:var(--hero-a)"/><rect x="104" y="118" width="32" height="46" rx="4" style="fill:var(--primary)"/><path d="M120 34V14" style="stroke:var(--primary);stroke-width:4;stroke-linecap:round"/><path d="M120 14h22l-6 7 6 7h-22z" style="fill:var(--accent)"/><rect x="40" y="164" width="160" height="8" rx="4" style="fill:var(--primary);opacity:.4"/></svg>';
+/* รูปสำหรับสไลด์หน้าปก: รูปหน้าปกที่ตั้งไว้ + ภาพบรรยากาศโรงพยาบาล */
+function heroImgs() {
+  const a = [], h = safeUrl(S.settings.heroBgUrl);
+  if (h) a.push(h);
+  S.campus.forEach(c => { const u = safeUrl(c.PhotoURL); if (u && a.length < 5) a.push(u); });
+  return a;
+}
+/* คอลัมน์ซ้าย: ผู้อำนวยการ + ข้อมูลโรงพยาบาล */
+function dirBox() {
+  const s = S.settings, ex = safeUrl(s.execPhotoUrl);
+  return '<div class="bx"><div class="dir-im">' + (ex ? img(ex, s.execName || 'ผู้อำนวยการ') : '<div class="dir-ph">' + ico('user') + '</div>') + '</div>' +
+    '<div class="dir-cap"><b>' + esc(s.execName || 'ผู้บริหารโรงพยาบาล') + '</b>' + (s.execPosition ? '<span>' + esc(s.execPosition) + '</span>' : '') + '</div></div>';
+}
+/* กล่องข้อมูลโรงพยาบาล: แสดงเป็นแถวเหมือนกล่องเว็บไซต์ที่เกี่ยวข้อง คลิกแล้วไปหน้าข้อมูลโรงพยาบาลที่หัวข้อนั้น */
+function infoBox(stu, nst) {
+  const keys = ['motto', 'identity', 'vision', 'mission', 'goals'];
+  const rows = keys.map(k => SCH.find(x => x[0] === k)).filter(Boolean);
+  return '<div class="bx"><div class="bx-hd"><h3>' + ico('info') + 'ข้อมูลโรงพยาบาล</h3></div><div class="bx-bd"><div class="lk-list">' +
+    rows.map(x => '<button class="lk-row" data-act="schgo" data-k="' + x[0] + '"><span class="lk-logo">' + ico(x[1]) + '</span><span class="lk-name">' + esc(x[2]) + '</span><span class="lk-go">' + ico('arrow') + '</span></button>').join('') +
+    '</div></div></div>';
+}
+/* กล่องเมนูหลัก (ใต้กล่องข้อมูลโรงพยาบาล) */
+function menuBox() {
+  const rows = [['docs', 'file', 'เอกสาร ระเบียบ แบบฟอร์ม และดาวน์โหลด'], ['contact', 'phone', 'ติดต่อเรา']];
+  return '<div class="bx"><div class="bx-hd"><h3>' + ico('menu') + 'เมนูหลัก</h3></div><div class="bx-bd"><div class="lk-list">' +
+    rows.map(x => '<button class="lk-row" data-act="nav" data-p="' + x[0] + '"><span class="lk-logo">' + ico(x[1]) + '</span><span class="lk-name">' + esc(x[2]) + '</span><span class="lk-go">' + ico('arrow') + '</span></button>').join('') +
+    '</div></div></div>';
+}
+/* คอลัมน์กลาง: ข่าวสาร & ประกาศ + ผลงานและรางวัล */
+function newsBox() {
+  return '<div class="bx"><div class="bx-hd"><h3>' + ico('news') + 'ข่าวสาร &amp; ประกาศ</h3><button class="btn out sm" data-act="nav" data-p="news">ดูทั้งหมด ' + ico('arrow') + '</button></div><div class="bx-bd">' + carouselHtml() + '</div></div>';
+}
+const sortedAwards = () => S.awards.slice().sort((a, b) => (Number(a.SortOrder) || 0) - (Number(b.SortOrder) || 0) || String(b.Year).localeCompare(String(a.Year)));
+function awardCard(a) {
+  return '<div class="gc"><div class="im" data-act="viewaward" data-id="' + esc(a.ID) + '">' + img(a.PhotoURL, a.Title) + '</div><div class="tx"><b>' + esc(a.Title) + '</b>' +
+    (a.Year ? '<small>' + esc(a.Year) + '</small>' : '') +
+    (S.admin ? '<div class="row" style="margin-top:6px"><button class="btn ghost sm" data-act="edititem" data-t="award" data-id="' + esc(a.ID) + '">แก้ไข</button><button class="btn danger sm" data-act="delitem" data-t="award" data-id="' + esc(a.ID) + '">ลบ</button></div>' : '') + '</div></div>';
+}
+function awardsBox() {
+  const all = sortedAwards(), top = all.slice(0, HOME_AWARDS);
+  return '<div class="bx"><div class="bx-hd"><h3>' + ico('star') + 'ผลงานและรางวัล</h3><div class="row">' + adminBtn('additem', '+ เพิ่ม', 'data-t="award"') +
+    (all.length > HOME_AWARDS ? '<button class="btn out sm" data-act="allawards">ดูทั้งหมด (' + all.length + ')</button>' : '') + '</div></div><div class="bx-bd">' +
+    (top.length ? '<div class="aw-grid">' + top.map(awardCard).join('') + '</div>' : emptyHtml('🏆', 'ยังไม่มีผลงานและรางวัล' + (S.admin ? ' — กด "+ เพิ่ม" เพื่อเพิ่ม' : ''))) + '</div></div>';
+}
+function viewAward(id) {
+  const a = S.awards.find(x => String(x.ID) === String(id)); if (!a) return;
+  const im = safeUrl(a.PhotoURL);
+  openModal(a.Title,
+    (im ? '<img src="' + esc(im) + '" alt="' + esc(a.Title) + '" style="width:100%;height:auto;border-radius:12px;display:block;margin-bottom:12px">' : '') +
+    (a.Year ? '<p style="margin-bottom:8px"><span class="chip">' + esc(a.Year) + '</span></p>' : '') +
+    (a.Detail ? '<p style="line-height:1.8;white-space:pre-line;overflow-wrap:anywhere">' + esc(a.Detail) + '</p>' : ''),
+    '<button class="btn" data-act="close">ปิด</button>', true);
+}
+function allAwards() {
+  openModal('ผลงานและรางวัล', '<div class="aw-grid">' + sortedAwards().map(awardCard).join('') + '</div>', '<button class="btn" data-act="close">ปิด</button>', true);
+}
+
+/* ----- ข่าวประชาสัมพันธ์ + ภาพกิจกรรม (สไลด์ซ้าย/ขวา ใต้ผลงานและรางวัล) ----- */
+const sortedPr = () => S.pr.slice().sort((a, b) => (Number(a.SortOrder) || 0) - (Number(b.SortOrder) || 0) || String(b.Date).localeCompare(String(a.Date)) || String(b.ID).localeCompare(String(a.ID)));
+/* รายการที่ใช้แสดงในสไลด์: { id, img, title, sub, text, n } */
+function hcItems(key) {
+  if (key === 'pr') {
+    return sortedPr().slice(0, HC_MAX).map(p => ({ id: p.ID, img: p.PhotoURL, title: p.Title, sub: fmtDate(p.Date), text: p.Detail, n: 0 }));
+  }
+  return S.records.filter(r => parseJ(r.Images).length)
+    .sort((a, b) => String(b.StartDate).localeCompare(String(a.StartDate)))
+    .slice(0, HC_MAX)
+    .map(r => { const ims = parseJ(r.Images); return { id: r.ID, img: thumb(ims[0].id, 1000), title: r.Title, sub: fmtDate(r.StartDate), text: r.Detail || r.Result || '', n: ims.length }; });
+}
+function hcInner(key) {
+  const items = hcItems(key), n = items.length;
+  if (!n) {
+    return key === 'pr'
+      ? emptyHtml('📢', 'ยังไม่มีข่าวประชาสัมพันธ์' + (S.admin ? ' — กด "+ เพิ่ม" เพื่อเพิ่ม' : ''))
+      : emptyHtml('📸', 'ยังไม่มีภาพกิจกรรม');
+  }
+  S.hc[key] = Math.min(Math.max(0, S.hc[key] || 0), n - 1);
+  const i = S.hc[key], it = items[i];
+  return '<div class="hc"><div class="hc-st"><div class="hc-im" data-act="hcopen" data-k="' + key + '" data-id="' + esc(it.id) + '">' + img(it.img, it.title) +
+    (it.n > 1 ? '<em>' + it.n + ' ภาพ</em>' : '') + '</div>' +
+    (n > 1 ? '<button class="hc-nv prv" data-act="hcprev" data-k="' + key + '" aria-label="ก่อนหน้า">' + ico('chevl') + '</button><button class="hc-nv nx" data-act="hcnext" data-k="' + key + '" aria-label="ถัดไป">' + ico('chevr') + '</button>' +
+      '<div class="hc-dots">' + items.map((x, k) => '<i class="' + (k === i ? 'on' : '') + '"></i>').join('') + '</div>' : '') + '</div>' +
+    '<div class="hc-cap"><b>' + esc(it.title) + '</b>' + (it.sub ? '<small>' + it.sub + (n > 1 ? ' · ' + (i + 1) + '/' + n : '') + '</small>' : '') +
+    (it.text ? '<p>' + esc(it.text) + '</p>' : '') +
+    (S.admin && key === 'pr' ? '<div class="row"><button class="btn ghost sm" data-act="edititem" data-t="pr" data-id="' + esc(it.id) + '">แก้ไข</button><button class="btn danger sm" data-act="delitem" data-t="pr" data-id="' + esc(it.id) + '">ลบ</button></div>' : '') +
+    '</div></div>';
+}
+function hcDraw(key) { const b = $('#hc_' + key); if (b) b.innerHTML = hcInner(key); }
+function hcStep(key, d) {
+  const n = hcItems(key).length; if (!n) return;
+  S.hc[key] = ((S.hc[key] || 0) + d + n) % n;
+  hcDraw(key);
+}
+function prCard(p) {
+  return '<div class="prc"><div class="prc-im" data-act="viewpr" data-id="' + esc(p.ID) + '">' + img(p.PhotoURL, p.Title) + '</div><div class="prc-cap"><b>' + esc(p.Title) + '</b>' +
+    (p.Date ? '<small>' + fmtDate(p.Date) + '</small>' : '') + (p.Detail ? '<p>' + esc(p.Detail) + '</p>' : '') +
+    (S.admin ? '<div class="row"><button class="btn ghost sm" data-act="edititem" data-t="pr" data-id="' + esc(p.ID) + '">แก้ไข</button><button class="btn danger sm" data-act="delitem" data-t="pr" data-id="' + esc(p.ID) + '">ลบ</button></div>' : '') + '</div></div>';
+}
+function prBody() {
+  const l = sortedPr().slice(0, HC_MAX);
+  if (!l.length) return emptyHtml('📢', 'ยังไม่มีข่าวประชาสัมพันธ์' + (S.admin ? ' — กด "+ เพิ่ม" เพื่อเพิ่ม' : ''));
+  return '<div class="prs-w"><div class="prs" id="prs">' + l.map(prCard).join('') + '</div>' +
+    (l.length > 1 ? '<button class="hc-nv prv" data-act="prprev" aria-label="ก่อนหน้า">' + ico('chevl') + '</button><button class="hc-nv nx" data-act="prnext" aria-label="ถัดไป">' + ico('chevr') + '</button>' : '') + '</div>';
+}
+/* เลื่อนทีละการ์ด วนกลับต้น/ท้ายเมื่อสุดทาง */
+function prStep(d) {
+  const e = $('#prs'); if (!e || !e.children.length) return;
+  const w = e.children[0].getBoundingClientRect().width + 14, max = e.scrollWidth - e.clientWidth;
+  if (d > 0 && e.scrollLeft >= max - 2) e.scrollTo({ left: 0 });
+  else if (d < 0 && e.scrollLeft <= 2) e.scrollTo({ left: max });
+  else e.scrollBy({ left: d * w });
+}
+function startPr() {
+  clearInterval(S.prTimer);
+  const e = $('#prs'); if (!e || e.children.length < 2) return;
+  S.prPause = false;
+  const on = () => { S.prPause = true; }, off = () => { S.prPause = false; };
+  e.addEventListener('mouseenter', on); e.addEventListener('mouseleave', off);
+  e.addEventListener('touchstart', on, { passive: true }); e.addEventListener('touchend', () => setTimeout(off, 3000));
+  S.prTimer = setInterval(() => { if (!S.prPause && $('#prs')) prStep(1); }, 4000);
+}
+function prBox() {
+  return '<div class="bx"><div class="bx-hd"><h3>' + ico('bell') + 'ข่าวประชาสัมพันธ์</h3><div class="row">' + adminBtn('additem', '+ เพิ่ม', 'data-t="pr"') + '</div></div><div class="bx-bd">' + prBody() + '</div></div>';
+}
+function viewPr(id) {
+  const p = S.pr.find(x => String(x.ID) === String(id)); if (!p) return;
+  const im = safeUrl(p.PhotoURL);
+  openModal(p.Title,
+    (im ? '<img src="' + esc(im) + '" alt="' + esc(p.Title) + '" style="width:100%;height:auto;border-radius:12px;display:block;margin-bottom:12px">' : '') +
+    (p.Date ? '<p style="margin-bottom:8px"><span class="chip">' + fmtDate(p.Date) + '</span></p>' : '') +
+    (p.Detail ? '<p style="line-height:1.8;white-space:pre-line;overflow-wrap:anywhere">' + esc(p.Detail) + '</p>' : ''),
+    '<button class="btn" data-act="close">ปิด</button>', true);
+}
+
+/* คอลัมน์ขวา: เว็บไซต์ที่เกี่ยวข้อง */
+function linksBox() {
+  const list = sortPeople(S.links || []);
+  if (!list.length && !S.admin) return '';
+  const row = l => {
+    const u = safeLink(l.URL), lg = safeUrl(l.LogoURL);
+    const inner = '<span class="lk-logo">' + (lg ? img(lg, l.Name) : ico('globe')) + '</span><span class="lk-name">' + esc(l.Name) + '</span>';
+    return u ? '<a class="lk-row" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer" title="' + esc(l.Name) + '">' + inner + '</a>' : '<div class="lk-row">' + inner + '</div>';
+  };
+  let body;
+  if (!list.length) body = '<p class="sc-empty">ยังไม่มีเว็บไซต์ที่เกี่ยวข้อง — กด "+ เพิ่ม" เพื่อเพิ่ม</p>';
+  else if (S.admin) {
+    /* โหมดผู้ดูแล: แสดงนิ่ง เพื่อให้กดแก้ไข/ลบได้สะดวก */
+    body = '<div class="lk-list">' + list.map(l => '<div class="lkw">' + row(l) + '<div class="row"><button class="btn ghost sm" data-act="edititem" data-t="link" data-id="' + esc(l.ID) + '">แก้ไข</button><button class="btn danger sm" data-act="delitem" data-t="link" data-id="' + esc(l.ID) + '">ลบ</button></div></div>').join('') + '</div>';
+  } else body = '<div class="lk-list">' + list.map(row).join('') + '</div>';
+  return '<div class="bx"><div class="bx-hd"><h3>' + ico('globe') + 'เว็บไซต์ที่เกี่ยวข้อง</h3>' + adminBtn('additem', '+ เพิ่ม', 'data-t="link"') + '</div><div class="bx-bd">' + body + '</div></div>';
+}
+function pHome(v) {
+  const s = S.settings, yr = latestYear(), rows = studentRows(yr);
+  const stu = sumOf(rows, 'Male') + sumOf(rows, 'Female'), nst = S.staff.length;
+  const pics = heroImgs();
+  S.hero = Math.max(0, Math.min(S.hero, pics.length - 1));
+  const orgT = esc(s.orgName);
+  const quick = [
+    ['school', 'info', 'ข้อมูลโรงพยาบาล', 'ประวัติ วิสัยทัศน์ อัตลักษณ์'],
+    ['news', 'news', 'ข่าวสาร & ประกาศ', S.banners.length + ' รายการ'],
+    ['staff', 'users', 'ข้อมูลบุคลากร', nst + ' คน'],
+    ['activities', 'image', 'ภาพกิจกรรม', S.records.length + ' กิจกรรม']
+  ];
+
+  v.innerHTML =
+    '<section class="hero2" id="hero">' +
+    pics.map((u, i) => '<div class="hs' + (i === S.hero ? ' on' : '') + '" style="background-image:url(\'' + cssUrl(u) + '\')"></div>').join('') +
+    (pics.length ? '' : '<div class="art">' + SCHOOL_SVG + '</div>') +
+    '<div class="wrap hero-in"><h1>' + esc(s.welcomeText || 'ยินดีต้อนรับ') + '<em>' + orgT + '</em></h1>' +
+    '<p>' + esc(s.affiliation) + (s.affiliation ? ' · ' : '') + 'ปีงบประมาณ ' + esc(s.academicYear) + '</p>' +
+    '<div class="hero-btns"><button class="btn" data-act="nav" data-p="activities">ดูภาพกิจกรรม ' + ico('arrow') + '</button><button class="btn line" data-act="nav" data-p="campus">สำรวจโรงพยาบาล ' + ico('arrow') + '</button></div></div>' +
+    (pics.length > 1 ? '<button class="hnv prv" data-act="heroprev" aria-label="ก่อนหน้า">' + ico('chevl') + '</button><button class="hnv nx" data-act="heronext" aria-label="ถัดไป">' + ico('chevr') + '</button><div class="hdots">' + pics.map((u, i) => '<i class="' + (i === S.hero ? 'on' : '') + '"></i>').join('') + '</div>' : '') +
+    '</section>' +
+    '<div class="wrap strip-w"><div class="strip">' + quick.map(q => '<button data-act="nav" data-p="' + q[0] + '"><span class="qi">' + ico(q[1]) + '</span><div><b>' + q[2] + '</b><span>' + esc(q[3]) + '</span></div><em class="qa">' + ico('arrow') + '</em></button>').join('') + '</div></div>' +
+
+    '<div class="wrap home3-w"><div class="home3">' +
+    '<div class="h3c">' + dirBox() + infoBox(stu, nst) + menuBox() + '</div>' +
+    '<div class="h3c">' + newsBox() + awardsBox() + prBox() + '</div>' +
+    '<div class="h3c">' + linksBox() + '</div>' +
+    '</div></div>';
+  startHero(); startCar(); startPr();
+}
+function heroShow(i) {
+  const sl = $$('#hero .hs'); if (!sl.length) return;
+  S.hero = (i + sl.length) % sl.length;
+  sl.forEach((e, k) => e.classList.toggle('on', k === S.hero));
+  $$('#hero .hdots i').forEach((e, k) => e.classList.toggle('on', k === S.hero));
+}
+function startHero() {
+  clearInterval(S.heroTimer);
+  if ($$('#hero .hs').length > 1) S.heroTimer = setInterval(() => heroShow(S.hero + 1), 6000);
+}
+const emptyHtml = (ic, t) => '<div class="card empty"><div class="big">' + ic + '</div><p>' + esc(t) + '</p></div>';
+function carouselHtml() {
+  const b = S.banners.filter(x => safeUrl(x.PhotoURL));
+  if (!b.length) return emptyHtml('🗓️', 'ยังไม่มีภาพประกาศ' + (S.admin ? ' — เพิ่มได้ที่เมนูข่าวสาร & ประกาศ' : ''));
+  S.car = Math.min(S.car, b.length - 1);
+  return '<div class="car" id="car">' + b.map((x, i) => '<div class="slide' + (i === S.car ? ' on' : '') + '" data-act="viewban" data-id="' + esc(x.ID) + '">' + img(x.PhotoURL, x.Title) + (x.Title ? '<div class="cap">' + esc(x.Title) + '</div>' : '') + '</div>').join('') +
+    (b.length > 1 ? '<button class="nv prv" data-act="carprev" aria-label="ก่อนหน้า">◀</button><button class="nv nx" data-act="carnext" aria-label="ถัดไป">▶</button><div class="dots">' + b.map((x, i) => '<i class="' + (i === S.car ? 'on' : '') + '"></i>').join('') + '</div>' : '') + '</div>';
+}
+function carShow(i) {
+  const sl = $$('#car .slide'); if (!sl.length) return;
+  S.car = (i + sl.length) % sl.length;
+  sl.forEach((e, k) => e.classList.toggle('on', k === S.car));
+  $$('#car .dots i').forEach((e, k) => e.classList.toggle('on', k === S.car));
+}
+function startCar() {
+  clearInterval(S.carTimer);
+  if ($$('#car .slide').length > 1) S.carTimer = setInterval(() => carShow(S.car + 1), 5000);
+}
+
+/* ----- News ----- */
+function viewBan(id) {
+  const b = S.banners.find(x => String(x.ID) === String(id)); if (!b) return;
+  openModal(b.Title || 'ข่าวสาร & ประกาศ', '<img src="' + esc(safeUrl(b.PhotoURL) || PH) + '" alt="' + esc(b.Title) + '" style="width:100%;height:auto;border-radius:12px;display:block">', '<button class="btn" data-act="close">ปิด</button>', true);
+}
+function pNews(v) {
+  const shown = S.banners.filter(x => safeUrl(x.PhotoURL));
+  v.innerHTML = '<div class="page-title"><h2>📰 ข่าวสาร &amp; ประกาศ</h2>' + adminBtn('additem', '+ เพิ่มข่าว/ประกาศ', 'data-t="banner"') + '</div>' + carouselHtml() +
+    (S.banners.length ? '<div class="sec-h"><h3>ทั้งหมด (' + S.banners.length + ')</h3></div><div class="gal">' + S.banners.map(b =>
+      '<div class="gc"><div class="im" data-act="viewban" data-id="' + esc(b.ID) + '">' + img(b.PhotoURL, b.Title) + '</div><div class="tx"><b>' + esc(b.Title || '(ไม่มีชื่อ)') + '</b>' +
+      (S.admin ? '<div class="row" style="margin-top:8px"><button class="btn ghost sm" data-act="edititem" data-t="banner" data-id="' + esc(b.ID) + '">แก้ไข</button><button class="btn danger sm" data-act="delitem" data-t="banner" data-id="' + esc(b.ID) + '">ลบ</button></div>' : '') + '</div></div>').join('') + '</div>' : '');
+  if (shown.length) startCar();
+}
+
+/* ----- School info (สไตล์ "เกี่ยวกับเรา": แบนเนอร์ + แท็บหัวข้อ + การ์ดเนื้อหา) ----- */
+/* หมวดหมู่ที่ผู้ดูแลเพิ่มเอง: เก็บใน Settings คีย์ customSections เป็น JSON [{id,title,text}] */
+function getSecs() {
+  try {
+    const v = JSON.parse(S.settings.customSections || '[]');
+    return Array.isArray(v) ? v.filter(x => x && x.id && x.title) : [];
+  } catch (e) { return []; }
+}
+const schList = () => SCH.concat(getSecs().map(c => ['c_' + c.id, 'star', c.title]));
+const schCur = () => schList().some(x => x[0] === S.sch.tab) ? S.sch.tab : 'history';
+function schText(k) {
+  const s = S.settings;
+  if (k === 'colors') return [s.schoolColors, s.schoolColor1, s.schoolColor2].filter(Boolean).join(' ');
+  if (k === 'commanders') return S.commanders.length ? 'x' : '';
+  if (k.indexOf('c_') === 0) { const c = getSecs().find(x => 'c_' + x.id === k); return c ? String(c.text || '') : ''; }
+  return s[k] || '';
+}
+/* ทำเนียบผู้บังคับบัญชา: เรียงตามลำดับที่ผู้ดูแลกำหนด (เลขน้อยขึ้นก่อน) */
+function cmdHtml() {
+  const list = S.commanders.slice().sort((a, b) => (Number(a.SortOrder) || 0) - (Number(b.SortOrder) || 0) || String(a.ID).localeCompare(String(b.ID)));
+  if (!list.length) return '';
+  return '<div class="cmd-grid">' + list.map(x => {
+    const cur = /ปัจจุบัน/.test(String(x.Term || ''));
+    return '<div class="cmd' + (cur ? ' now' : '') + '"><div class="cmd-im">' + img(x.PhotoURL, x.Name) + '</div>' +
+      (cur ? '<span class="cmd-badge">ผู้บังคับบัญชาปัจจุบัน</span>' : '') +
+      '<b class="cmd-n">' + esc(x.Name) + '</b>' + (x.Position ? '<span class="cmd-p">' + esc(x.Position) + '</span>' : '') +
+      (x.Term ? '<span class="cmd-t">' + esc(x.Term) + '</span>' : '') +
+      (S.admin ? '<div class="row" style="justify-content:center;margin-top:10px"><button class="btn ghost sm" data-act="edititem" data-t="cmd" data-id="' + esc(x.ID) + '">แก้ไข</button><button class="btn danger sm" data-act="delitem" data-t="cmd" data-id="' + esc(x.ID) + '">ลบ</button></div>' : '') + '</div>';
+  }).join('') + '</div>';
+}
+/* นโยบายเจ้ากรมแพทย์ทหารอากาศ */
+function dmdHtml() {
+  const s = S.settings, lk = safeLink(s.dmdLink);
+  if (!s.dmdPolicy && !s.dmdName && !lk) return '';
+  const who = (s.dmdName || s.dmdPosition || safeUrl(s.dmdPhotoUrl))
+    ? '<div class="dmd-who">' + (safeUrl(s.dmdPhotoUrl) ? img(s.dmdPhotoUrl, s.dmdName) : '') + '<div>' +
+      (s.dmdName ? '<b>' + esc(s.dmdName) + '</b>' : '') + (s.dmdPosition ? '<span>' + esc(s.dmdPosition) + '</span>' : '') + '</div></div>' : '';
+  return who + (s.dmdPolicy ? '<div class="ab-tx">' + esc(s.dmdPolicy) + '</div>' : '') +
+    (lk ? '<div style="text-align:center;margin-top:18px"><a class="btn" href="' + esc(lk) + '" target="_blank" rel="noopener">เปิดเอกสารนโยบายฉบับเต็ม ' + ico('arrow') + '</a></div>' : '');
+}
+function schInner(k) {
+  const s = S.settings, ok = c => /^#[0-9a-f]{6}$/i.test(c || '');
+  const empty = '<p class="sc-empty">ยังไม่มีข้อมูล' + (S.admin ? (k === 'commanders' ? ' — กด "+ เพิ่มรายชื่อผู้บังคับบัญชา" ด้านล่าง' : ' — แก้ไขได้ที่ตั้งค่าระบบ') : '') + '</p>';
+  if (k === 'colors') {
+    const sw = [s.schoolColor1, s.schoolColor2].filter(ok).map(c => '<span class="sw2" style="background:' + c + '" title="' + c + '"></span>').join('');
+    if (!sw && !s.schoolColors) return empty;
+    return (sw ? '<div class="ab-sw">' + sw + '</div>' : '') + (s.schoolColors ? '<div class="ab-tx">' + esc(s.schoolColors) + '</div>' : '');
+  }
+  if (k === 'commanders') return cmdHtml() || empty;
+  if (k === 'dmdPolicy') return dmdHtml() || empty;
+  const t = schText(k);
+  return t ? '<div class="ab-tx">' + esc(t) + '</div>' : empty;
+}
+function schTabs() {
+  const cur = schCur();
+  return schList().map(x => '<button data-act="schtab" data-k="' + esc(x[0]) + '" class="' + (cur === x[0] ? 'on' : '') + '">' + esc(x[2]) + '</button>').join('') +
+    (S.admin ? '<button class="add" data-act="addsec">+ เพิ่มหมวดหมู่</button>' : '');
+}
+function schBody() {
+  const all = schList(), cur = schCur();
+  const list = all.filter(x => x[0] === cur);
+  if (!list.length) return '<div class="empty"><div class="big">🔎</div><p>ไม่พบหัวข้อ</p></div>';
+  return list.map(x => {
+    const custom = x[0].indexOf('c_') === 0, sid = x[0].slice(2);
+    const acts = !S.admin ? '' : '<div class="ab-edit">' + (custom
+      ? adminBtn('editsec', 'แก้ไขข้อมูล', 'data-id="' + esc(sid) + '"') + '<button class="btn danger sm" data-act="delsec" data-id="' + esc(sid) + '">ลบหมวดหมู่</button>'
+      : x[0] === 'commanders' ? adminBtn('additem', '+ เพิ่มรายชื่อผู้บังคับบัญชา', 'data-t="cmd"')
+      : adminBtn('nav', 'แก้ไขข้อมูล', 'data-p="settings"')) + '</div>';
+    return '<article class="ab-card' + (x[0] === 'motto' ? ' motto' : '') + '"><h3 class="ab-t">' + ico('spark') + '<span>' + esc(x[2]) + '</span>' + ico('spark') + '</h3><div class="ab-line"></div>' + schInner(x[0]) + acts + '</article>';
+  }).join('');
+}
+function drawSch() {
+  const b = $('#schBody'), t = $('#schTabs');
+  if (b) b.innerHTML = schBody();
+  if (t) t.innerHTML = schTabs();
+}
+function pSchool(v) {
+  const s = S.settings;
+  v.innerHTML = '<section class="ab-hero"><h2>ข้อมูลโรงพยาบาล</h2><p>' + esc(s.orgName) + '</p></section>' +
+    '<div class="ab-filter"><div class="ab-tabs" id="schTabs">' + schTabs() + '</div></div>' +
+    '<div class="ab-wrap" id="schBody">' + schBody() + '</div>';
+}
+/* เพิ่ม/แก้ไข/ลบ หมวดหมู่ข้อมูลโรงพยาบาล (ผู้ดูแล) */
+function secModal(id) {
+  const cur = id ? (getSecs().find(x => String(x.id) === String(id)) || {}) : {};
+  openModal((id ? 'แก้ไข' : 'เพิ่ม') + 'หมวดหมู่ข้อมูล',
+    '<div class="field"><label class="f">ชื่อหมวดหมู่ <span class="req">*</span></label><input type="text" data-sec="title" maxlength="100" value="' + esc(cur.title) + '" placeholder="เช่น พันธกิจ, ข้อมูลการศึกษา, ปรัชญาโรงพยาบาล"></div>' +
+    '<div class="field"><label class="f">ข้อมูล</label><textarea data-sec="text" style="min-height:200px">' + esc(cur.text) + '</textarea></div>',
+    '<button class="btn ghost" data-act="close">ยกเลิก</button><button class="btn" data-act="savesec" data-id="' + esc(id || '') + '">บันทึก</button>');
+}
+function persistSecs(arr, tab) {
+  api('saveSettings', [{ customSections: JSON.stringify(arr) }, S.pwd], 'กำลังบันทึก...').then(r => {
+    if (!check(r)) return;
+    S.settings = r.settings || S.settings;
+    if (tab) S.sch.tab = tab;
+    S.sch.q = '';
+    closeModal(); toast(r.msg, 'ok'); render();
+  }).catch(() => {});
+}
+function saveSec(id) {
+  const t = $('[data-sec="title"]'), x = $('[data-sec="text"]');
+  const title = t ? t.value.trim() : '', text = x ? x.value.trim() : '';
+  if (!title) { toast('กรุณากรอกชื่อหมวดหมู่', 'err'); return; }
+  const arr = getSecs();
+  let sid = id;
+  if (id) {
+    const c = arr.find(z => String(z.id) === String(id));
+    if (!c) { toast('ไม่พบหมวดหมู่ที่ต้องการแก้ไข', 'err'); return; }
+    c.title = title; c.text = text;
+  } else {
+    sid = 's' + Date.now().toString(36);
+    arr.push({ id: sid, title: title, text: text });
+  }
+  persistSecs(arr, 'c_' + sid);
+}
+function delSec(id) {
+  if (!confirm('ยืนยันการลบหมวดหมู่นี้?')) return;
+  persistSecs(getSecs().filter(z => String(z.id) !== String(id)), 'history');
+}
+
+/* ----- Documents (เอกสาร ระเบียบ แบบฟอร์ม และดาวน์โหลด) ----- */
+const dlUrl = id => 'https://drive.google.com/uc?export=download&id=' + encodeURIComponent(id);
+function filteredDocs() {
+  const q = S.dq.q.trim().toLowerCase();
+  return S.docs.filter(d => (!S.dq.dept || d.Dept === S.dq.dept) &&
+    (!q || (String(d.Title) + ' ' + String(d.Code) + ' ' + String(d.FileName)).toLowerCase().indexOf(q) >= 0))
+    .sort((a, b) => String(b.Date).localeCompare(String(a.Date)) || String(b.ID).localeCompare(String(a.ID)));
+}
+function docRow(d) {
+  const hasF = !!d.FileID, lk = safeLink(d.Link);
+  return '<div class="dc-row"><span class="dc-ic' + (hasF ? '' : ' lnk') + '">' + ico(hasF ? 'file' : 'globe') + '</span><div class="dc-main"><div class="dc-meta">' +
+    (d.Code ? '<span class="dc-code">' + esc(d.Code) + '</span>' : '') + (d.Date ? '<span>วันที่: ' + fmtDate(d.Date) + '</span>' : '') + (d.Dept ? '<span class="chip">' + esc(d.Dept) + '</span>' : '') +
+    '</div><b class="dc-t">' + esc(d.Title) + '</b></div><div class="dc-act">' +
+    (hasF ? '<a class="btn gold" href="' + esc(viewUrl(d.FileID)) + '" target="_blank" rel="noopener">' + ico('eye') + 'เปิดดูเอกสาร</a>' +
+      '<a class="btn out" href="' + esc(dlUrl(d.FileID)) + '" target="_blank" rel="noopener">' + ico('download') + 'ดาวน์โหลด</a>' : '') +
+    (lk ? '<a class="btn ' + (hasF ? 'out' : 'gold') + '" href="' + esc(lk) + '" target="_blank" rel="noopener noreferrer">' + ico('globe') + 'เปิดลิงก์ไฟล์งาน</a>' : '') +
+    (S.admin ? '<button class="btn ghost sm" data-act="editdoc" data-id="' + esc(d.ID) + '">แก้ไข</button><button class="btn danger sm" data-act="delitem" data-t="doc" data-id="' + esc(d.ID) + '">ลบ</button>' : '') +
+    '</div></div>';
+}
+function docsBody() {
+  const l = filteredDocs();
+  return '<div class="dc-top">รายการเอกสารทั้งหมด (' + l.length + ' รายการ)</div>' +
+    (l.length ? l.map(docRow).join('') : '<div class="empty"><div class="big">📄</div><p>' + (S.docs.length ? 'ไม่พบเอกสารตามเงื่อนไขที่เลือก' : 'ยังไม่มีเอกสาร' + (S.admin ? ' — กด "+ เพิ่มเอกสาร" เพื่อเพิ่ม' : '')) + '</p></div>');
+}
+function drawDocs() { const b = $('#docBody'); if (b) b.innerHTML = docsBody(); }
+function pDocs(v) {
+  const dopts = Array.from(new Set(DOC_DEPTS.concat(S.docs.map(d => d.Dept).filter(Boolean))));
+  v.innerHTML = '<div class="dc-head"><h2>เอกสาร ระเบียบ แบบฟอร์ม และดาวน์โหลด</h2><div class="dc-filters">' + adminBtn('adddoc', '+ เพิ่มเอกสาร') + adminBtn('manage', '⚙ จัดการกลุ่มงาน', 'data-k="docdept"') +
+    '<select data-dq="dept" aria-label="กรองตามกลุ่มงาน"><option value="">ทุกกลุ่มงาน</option>' + dopts.map(x => '<option' + (S.dq.dept === x ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select>' +
+    '<label class="ab-search">' + ico('search') + '<input type="text" id="docQ" placeholder="ค้นหาชื่อเอกสาร หรือรหัส..." value="' + esc(S.dq.q) + '" aria-label="ค้นหาเอกสาร" autocomplete="off"></label></div></div>' +
+    '<div class="dc-card" id="docBody">' + docsBody() + '</div>';
+}
+function docModal(id) {
+  const cur = id ? (S.docs.find(x => String(x.ID) === String(id)) || {}) : {};
+  S.docUp = cur.FileID ? { id: cur.FileID, name: cur.FileName || '' } : null;
+  const dv = cur.Dept == null ? '' : cur.Dept;
+  const today = new Date().toISOString().slice(0, 10);
+  openModal((id ? 'แก้ไข' : 'เพิ่ม') + 'เอกสาร',
+    '<div class="field"><label class="f">เลขที่/รหัสเอกสาร (เช่น ก.บ. 001/2569)</label><input type="text" data-it="Code" value="' + esc(cur.Code) + '"></div>' +
+    '<div class="field"><label class="f">ชื่อเอกสาร <span class="req">*</span></label><input type="text" data-it="Title" value="' + esc(cur.Title) + '"></div>' +
+    '<div class="grid2"><div class="field"><label class="f">กลุ่มงาน <button type="button" class="btn out sm lbl-add" data-act="quickadd" data-k="docdept">+ เพิ่มใหม่</button></label><select data-it="Dept">' + selOptions('docdept', dv) + '</select></div>' +
+    '<div class="field"><label class="f">วันที่</label><input type="date" data-it="Date" value="' + esc(cur.Date || (id ? '' : today)) + '"></div></div>' +
+    '<p class="map-hint" style="margin-top:0">ต้องแนบไฟล์ หรือใส่ลิงก์ไฟล์งาน อย่างน้อย 1 อย่าง (ใส่ทั้งสองอย่างก็ได้)</p>' +
+    '<div class="field"><label class="f">ไฟล์เอกสาร (PDF, Word, Excel, PowerPoint)</label><input type="file" id="docFile" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"><div class="dc-file" id="docFileInfo">' + docFileInfo() + '</div></div>' +
+    '<div class="field"><label class="f">ลิงก์ไฟล์งาน (Google Drive, เว็บไซต์ หรือที่อื่น ๆ)</label><input type="text" data-it="Link" placeholder="https://drive.google.com/... หรือลิงก์เว็บไซต์อื่น" value="' + esc(cur.Link) + '" autocomplete="off"></div>',
+    '<button class="btn ghost" data-act="close">ยกเลิก</button><button class="btn" data-act="savedoc" data-id="' + esc(id || '') + '">บันทึก</button>');
+}
+function docFileInfo() {
+  return S.docUp
+    ? '📎 ' + esc(S.docUp.name || S.docUp.id) + ' (แนบแล้ว — เลือกไฟล์ใหม่เพื่อเปลี่ยน) <button type="button" class="btn danger sm" data-act="rmdocfile">เอาไฟล์ออก</button>'
+    : 'ยังไม่ได้แนบไฟล์';
+}
+function uploadDocFile(file) {
+  if (!file) return;
+  if (file.size > 8 * 1024 * 1024) { toast('ไฟล์ใหญ่เกิน 8 MB', 'err'); return; }
+  readFile(file, false).then(f => api('uploadDoc', [{ name: f.name, mime: f.mime, data: f.data }, S.pwd], 'กำลังอัปโหลดไฟล์...').then(r => {
+    if (!check(r)) return;
+    S.docUp = { id: r.id, name: r.name };
+    const i = $('#docFileInfo'); if (i) i.innerHTML = docFileInfo();
+    const t = $('[data-it="Title"]'); if (t && !t.value.trim()) t.value = r.name.replace(/\.\w+$/, '');
+    toast(r.msg, 'ok');
+  })).catch(e => { if (e && e.message) toast(e.message, 'err'); });
+}
+function saveDoc(id) {
+  const item = { ID: id || '' };
+  $$('[data-it]').forEach(e => { item[e.dataset.it] = e.value.trim(); });
+  if (!item.Title) { toast('กรุณากรอกชื่อเอกสาร', 'err'); return; }
+  if (item.Link) {
+    const u = safeLink(item.Link);
+    if (!u) { toast('ลิงก์ไฟล์งานไม่ถูกต้อง', 'err'); return; }
+    item.Link = u;
+  }
+  if (!S.docUp && !item.Link) { toast('กรุณาแนบไฟล์ หรือใส่ลิงก์ไฟล์งานอย่างน้อย 1 อย่าง', 'err'); return; }
+  item.FileID = S.docUp ? S.docUp.id : ''; item.FileName = S.docUp ? S.docUp.name : '';
+  api('saveItem', ['doc', item, S.pwd], 'กำลังบันทึก...').then(r => {
+    if (check(r)) { S.docs = r.list; closeModal(); toast(r.msg, 'ok'); render(); }
+  }).catch(() => {});
+}
+
+/* ----- Contact (ติดต่อเรา) + แผนที่ ----- */
+const LF = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/';
+let leafP = null;
+function loadLeaflet() {
+  if (window.L && window.L.map) return Promise.resolve();
+  if (leafP) return leafP;
+  leafP = new Promise((res, rej) => {
+    const c = document.createElement('link'); c.rel = 'stylesheet'; c.href = LF + 'leaflet.min.css'; document.head.appendChild(c);
+    const sc = document.createElement('script'); sc.src = LF + 'leaflet.min.js'; sc.onload = res;
+    sc.onerror = () => { leafP = null; rej(new Error('map')); };
+    document.head.appendChild(sc);
+  });
+  return leafP;
+}
+const mapNum = v => { const t = String(v == null ? '' : v).trim(); if (!t) return null; const n = Number(t); return isFinite(n) ? n : null; };
+const gmapsUrl = (la, ln) => 'https://www.google.com/maps?q=' + la + ',' + ln;
+function initMap(elId, lat, lng, edit, onPick) {
+  const el = $('#' + elId); if (!el) return;
+  const has = lat != null && lng != null;
+  loadLeaflet().then(() => {
+    if ($('#' + elId) !== el) return;
+    if (S.map) { S.map.remove(); S.map = null; }
+    const m = L.map(el, { scrollWheelZoom: false }).setView(has ? [lat, lng] : [13.7563, 100.5018], has ? 16 : 6);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(m);
+    const icon = L.icon({ iconUrl: LF + 'images/marker-icon.png', iconRetinaUrl: LF + 'images/marker-icon-2x.png', shadowUrl: LF + 'images/marker-shadow.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] });
+    let mk = null;
+    const make = (la, ln) => {
+      mk = L.marker([la, ln], { icon: icon, draggable: !!edit }).addTo(m);
+      if (edit) mk.on('dragend', () => { const p = mk.getLatLng(); onPick(p.lat, p.lng); });
+    };
+    if (has) make(lat, lng);
+    if (edit) {
+      m.on('click', ev => { if (mk) mk.setLatLng(ev.latlng); else make(ev.latlng.lat, ev.latlng.lng); onPick(ev.latlng.lat, ev.latlng.lng); });
+      S.mapSet = (la, ln) => { if (mk) mk.setLatLng([la, ln]); else make(la, ln); m.setView([la, ln], 16); };
+      S.mapClear = () => { if (mk) { m.removeLayer(mk); mk = null; } };
+    }
+    S.map = m;
+  }).catch(() => {
+    if ($('#' + elId) !== el) return;
+    el.innerHTML = has && !edit ? '<iframe src="https://www.google.com/maps?q=' + lat + ',' + lng + '&z=16&output=embed" style="border:0;width:100%;height:100%" loading="lazy" title="แผนที่"></iframe>' : '<div class="empty"><p>โหลดแผนที่ไม่สำเร็จ</p></div>';
+  });
+}
+function lineHref(id) {
+  id = String(id || '').trim();
+  if (!id) return '';
+  if (/^https?:\/\//i.test(id)) return id;
+  return id[0] === '@' ? 'https://line.me/R/ti/p/' + id : 'https://line.me/ti/p/~' + encodeURIComponent(id);
+}
+function ctItem(icon, label, val, href, cls, top) {
+  const inner = '<span class="ct-ic ' + (cls || '') + '">' + ico(icon) + '</span><span class="ct-tx"><small>' + label + '</small><b>' + esc(val) + '</b></span>';
+  return href ? '<a class="ct-item" href="' + esc(href) + '" target="' + (top ? '_top' : '_blank') + '" rel="noopener noreferrer">' + inner + '</a>' : '<div class="ct-item">' + inner + '</div>';
+}
+function pContact(v) {
+  const s = S.settings, la = mapNum(s.mapLat), ln = mapNum(s.mapLng), has = la != null && ln != null;
+  const items = [];
+  if (s.address) items.push(ctItem('pin', 'สถานที่ตั้ง', s.address, has ? gmapsUrl(la, ln) : ''));
+  if (s.phone) items.push(ctItem('phone', 'โทรศัพท์', s.phone, 'tel:' + String(s.phone).replace(/[^\d+]/g, ''), '', true));
+  if (s.emergencyPhone) items.push(ctItem('phone', 'เบอร์ฉุกเฉิน', s.emergencyPhone, 'tel:' + String(s.emergencyPhone).replace(/[^\d+]/g, ''), '', true));
+  if (s.openHours) items.push(ctItem('cal', 'เวลาทำการ', s.openHours, ''));
+  if (s.email) items.push(ctItem('mail', 'อีเมล', s.email, 'mailto:' + s.email, '', true));
+  if (s.lineId) items.push(ctItem('chat', 'LINE', s.lineId, lineHref(s.lineId), 'line'));
+  if (s.facebookUrl) items.push(ctItem('fb', 'Facebook', String(s.facebookUrl).replace(/^https?:\/\//i, '').replace(/\/$/, ''), safeLink(s.facebookUrl), 'fb'));
+  const left = items.length ? '<div class="ct-list">' + items.join('') + '</div>' : emptyHtml('📞', 'ยังไม่มีข้อมูลติดต่อ' + (S.admin ? ' — เพิ่มได้ที่ตั้งค่าระบบ' : ''));
+  const map = '<div class="bx"><div class="bx-hd"><h3>' + ico('pin') + 'แผนที่โรงพยาบาล</h3>' + adminBtn('nav', 'ปักหมุด/แก้ไข', 'data-p="settings"') + '</div>' +
+    (has ? '<div class="map-box" id="cMap"></div><div class="map-act"><a class="btn out sm" href="' + esc(gmapsUrl(la, ln)) + '" target="_blank" rel="noopener">เปิดใน Google Maps ' + ico('arrow') + '</a>' +
+      '<a class="btn gold sm" href="https://www.google.com/maps/dir/?api=1&destination=' + la + ',' + ln + '" target="_blank" rel="noopener">นำทาง ' + ico('arrow') + '</a></div>'
+      : '<div class="bx-bd">' + emptyHtml('📍', 'ยังไม่ได้ปักหมุดตำแหน่งโรงพยาบาล' + (S.admin ? ' — ปักหมุดได้ที่ตั้งค่าระบบ' : '')) + '</div>') + '</div>';
+  v.innerHTML = '<section class="ab-hero"><h2>ติดต่อเรา</h2><p>' + esc(s.orgName) + '</p></section><div class="ct-grid">' + left + map + '</div>';
+  if (has) initMap('cMap', la, ln, false);
+}
+
+/* ----- Staff (แผนผังบุคลากร) ----- */
+const roleOf = p => (p.Role === 'head' || p.Role === 'deputy') ? p.Role : 'member';
+const isExec = p => /^ผู้บริหาร$|ผู้อำนวยการ/.test(p.Dept || '');
+const sortPeople = a => a.slice().sort((x, y) => (Number(x.SortOrder) || 0) - (Number(y.SortOrder) || 0) || String(x.Name).localeCompare(String(y.Name), 'th'));
+/* โหมดจุดบริการ: เรียงตามลำดับ แล้วตามจุดบริการที่ประจำ (แบบตัวเลข) */
+const sortHome = a => a.slice().sort((x, y) => (Number(x.SortOrder) || 0) - (Number(y.SortOrder) || 0) ||
+  String(x.Homeroom || '').localeCompare(String(y.Homeroom || ''), 'th', { numeric: true }) || String(x.Name).localeCompare(String(y.Name), 'th'));
+const PAL = [
+  ['#f6b98a', '#fff5ec', '#fde1c8', '#b4540f'], ['#9cc7f5', '#eef6ff', '#d3e7fc', '#1f5fa8'],
+  ['#9fd8b1', '#eefaf1', '#d1efda', '#23784a'], ['#c3aef0', '#f5f0ff', '#e2d8fa', '#6a46b8'],
+  ['#f4a9c4', '#fff0f6', '#fbd4e3', '#b02f66'], ['#8fd9d0', '#ecfaf8', '#c8efea', '#1a7d73'],
+  ['#f2d27a', '#fffaea', '#fbecb9', '#8a6a08'], ['#f2a09a', '#fff1f0', '#fcd3d0', '#a8332b']
+];
+function palFor(name) {
+  let i = DEPTS.indexOf(name);
+  if (i < 0) {
+    const g = GROUPS.indexOf(name), d = DIVS.indexOf(name);
+    i = g >= 0 ? g + 1 : d >= 0 ? d + 2 : Array.from(String(name)).reduce((a, c) => a + c.charCodeAt(0), 0);
+  }
+  return PAL[i % PAL.length];
+}
+function pcard(p) {
+  const r = roleOf(p), mode = S.org.mode;
+  const sub = mode === 'group' ? p.Dept : mode === 'homeroom' ? (p.Homeroom ? 'ประจำ ' + p.Homeroom : p.Dept) : p.Group;
+  const badge = (r === 'member' && mode === 'homeroom') ? 'ประจำจุดบริการ' : RL[r];
+  return '<div class="pc ' + r + '">' + img(p.PhotoURL, p.Name) + '<span class="rb">' + esc(badge) + '</span><b>' + esc(p.Name) + '</b>' +
+    (p.Position ? '<span class="ps">' + esc(p.Position) + '</span>' : '') + (sub ? '<span class="ps2">' + esc(sub) + '</span>' : '') +
+    (p.Homeroom && mode !== 'homeroom' ? '<span class="ps2">ประจำ ' + esc(p.Homeroom) + '</span>' : '') +
+    (p.Phone ? '<span class="ph">' + ico('phone') + esc(p.Phone) + '</span>' : '') +
+    (S.admin ? '<div class="acts"><button class="btn ghost sm" data-act="edititem" data-t="staff" data-id="' + esc(p.ID) + '">แก้ไข</button><button class="btn danger sm" data-act="delitem" data-t="staff" data-id="' + esc(p.ID) + '">ลบ</button></div>' : '') + '</div>';
+}
+function unitHtml(title, list) {
+  const c = palFor(title), srt = S.org.mode === 'homeroom' ? sortHome : sortPeople;
+  const tiers = ['head', 'deputy', 'member'].map(r => {
+    const a = srt(list.filter(p => roleOf(p) === r));
+    return a.length ? '<div class="tier">' + a.map(pcard).join('') + '</div>' : '';
+  }).join('');
+  return '<section class="org-unit" style="--c-bd:' + c[0] + ';--c-bg:' + c[1] + ';--c-tint:' + c[2] + ';--c-ink:' + c[3] + '"><h3><span>' + ico('spark') + esc(title) + ' <em>' + list.length + ' คน</em>' + ico('spark') + '</span></h3>' + tiers + '</section>';
+}
+function pStaff(v) {
+  const o = S.org, st = S.staff;
+  const uni = (base, key) => Array.from(new Set(base.concat(st.map(p => p[key]).filter(Boolean))));
+  const depts = uni(DEPTS, 'Dept'), groups = uni(GROUPS, 'Group'), divs = uni(DIVS, 'Division');
+  const opts = o.mode === 'dept' ? depts : o.mode === 'group' ? groups : o.mode === 'homeroom' ? divs : [];
+  if (opts.indexOf(o.val) < 0) o.val = '';
+  const units = (key, names, empty) => {
+    const out = names.map(n => { const l = st.filter(p => (p[key] || '') === n); return l.length ? unitHtml(n, l) : ''; }).join('');
+    const rest = empty ? st.filter(p => !p[key] && !isExec(p)) : [];
+    return out + (rest.length ? unitHtml(empty, rest) : '');
+  };
+  let body;
+  if (!st.length) body = emptyHtml('👥', 'ยังไม่มีข้อมูลบุคลากร');
+  else if (o.mode === 'all') {
+    const ex = st.filter(isExec);
+    body = (ex.length ? unitHtml('ผู้บริหาร', ex) + '<div class="org-stem"></div>' : '') +
+      '<div class="org-grid">' + units('Dept', depts.filter(d => !isExec({ Dept: d })), 'ไม่ระบุกลุ่มงาน') + '</div>';
+  } else if (o.mode === 'dept') {
+    body = '<div class="org-grid">' + units('Dept', o.val ? [o.val] : depts, o.val ? '' : 'ไม่ระบุกลุ่มงาน') + '</div>';
+  } else if (o.mode === 'group') {
+    body = '<div class="org-grid">' + units('Group', o.val ? [o.val] : groups, '') + '</div>';
+  } else {
+    body = '<div class="org-grid">' + units('Division', o.val ? [o.val] : divs, '') + '</div>';
+  }
+  if (st.length && !body.replace(/<[^>]*>/g, '').trim()) {
+    body = emptyHtml('🔎', o.mode === 'homeroom' ? 'ยังไม่มีบุคลากรที่ระบุจุดบริการ' + (S.admin ? ' — เพิ่มโดยเลือก "สายงาน" และ "จุดบริการที่ประจำ" ในข้อมูลบุคลากร' : '') : 'ไม่พบบุคลากรตามเงื่อนไขที่เลือก');
+  }
+  const seg = [['all', 'บุคลากรทั้งหมด'], ['dept', 'กลุ่มงาน'], ['group', 'แผนก/หน่วยงาน'], ['homeroom', 'จุดบริการ']];
+  const allLbl = o.mode === 'dept' ? 'ทุกกลุ่มงาน' : o.mode === 'group' ? 'ทุกแผนก' : 'ทุกสายงาน';
+  v.innerHTML = '<div class="page-title"><h2>👩‍🏫 แผนผังบุคลากร</h2>' + adminBtn('additem', '+ เพิ่มบุคลากร', 'data-t="staff"') + '</div>' +
+    '<div class="org-filter"><div class="seg" role="group" aria-label="ตัวกรอง">' +
+    seg.map(x => '<button data-act="orgmode" data-m="' + x[0] + '" class="' + (o.mode === x[0] ? 'on' : '') + '" aria-pressed="' + (o.mode === x[0]) + '">' + x[1] + '</button>').join('') + '</div>' +
+    (opts.length ? '<select data-org="1" aria-label="เลือกรายการ" style="width:auto;max-width:100%"><option value="">' + allLbl + '</option>' +
+      opts.map(x => '<option' + (x === o.val ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select>' : '') + '</div>' +
+    (S.admin ? '<div class="row no-print" style="margin-bottom:18px"><span style="color:var(--muted);font-size:13px">จัดการรายการ:</span>' +
+      [['dept', 'กลุ่มงาน'], ['group', 'แผนก/หน่วยงาน'], ['div', 'สายงาน (จุดบริการ)']].map(x => '<button class="btn ghost sm" data-act="manage" data-k="' + x[0] + '">⚙ ' + x[1] + '</button>').join('') + '</div>' : '') + body;
+}
+
+/* ----- Campus ----- */
+function pCampus(v) {
+  v.innerHTML = '<div class="page-title"><h2>🌳 ภาพบรรยากาศโรงพยาบาล</h2>' + adminBtn('additem', '+ เพิ่มสถานที่', 'data-t="campus"') + '</div>' +
+    (S.campus.length ? '<div class="gal">' + S.campus.map(c => '<div class="gc" style="cursor:default"><div class="im">' + img(c.PhotoURL, c.Name) + '</div><div class="tx"><b>' + esc(c.Name) + '</b>' +
+      (S.admin ? '<div class="row" style="margin-top:8px"><button class="btn ghost sm" data-act="edititem" data-t="campus" data-id="' + esc(c.ID) + '">แก้ไข</button><button class="btn danger sm" data-act="delitem" data-t="campus" data-id="' + esc(c.ID) + '">ลบ</button></div>' : '') + '</div></div>').join('') + '</div>' : emptyHtml('🌳', 'ยังไม่มีภาพสถานที่'));
+}
+
+/* ----- Activities ----- */
+function pActivities(v) {
+  const yrs = Array.from(new Set(S.records.map(r => String(r.AcademicYear)).filter(Boolean))).sort().reverse();
+  const opt = (arr, cur, all) => '<option value="">' + all + '</option>' + arr.map(x => '<option' + (x === cur ? ' selected' : '') + '>' + esc(x) + '</option>').join('');
+  const g = S.gal;
+  if (!S.admin) S.tab = 'gallery';
+  v.innerHTML = '<div class="page-title"><h2>📸 ภาพกิจกรรมโรงพยาบาล</h2></div>' +
+    (S.admin ? '<div class="tabs"><button data-act="tab" data-t="gallery" class="' + (S.tab === 'gallery' ? 'on' : '') + '">คลังภาพ</button><button data-act="tab" data-t="form" class="' + (S.tab === 'form' ? 'on' : '') + '">บันทึกกิจกรรม</button></div>' : '') +
+    '<div id="tabGallery"' + (S.tab === 'gallery' ? '' : ' hidden') + '><div class="card"><div class="filters">' +
+    '<input type="text" data-gal="q" placeholder="🔍 ค้นหาชื่อหรือรายละเอียด" value="' + esc(g.q) + '" aria-label="ค้นหา">' +
+    '<select data-gal="type" aria-label="ประเภท">' + opt(TYPES, g.type, 'ทุกประเภท') + '</select>' +
+    '<select data-gal="cat" aria-label="หมวดหมู่">' + opt(CATS, g.cat, 'ทุกหมวดหมู่') + '</select>' +
+    '<select data-gal="year" aria-label="ปีงบประมาณ">' + opt(yrs, g.year, 'ทุกปีงบประมาณ') + '</select>' +
+    '<input type="date" data-gal="from" value="' + esc(g.from) + '" aria-label="ตั้งแต่วันที่">' +
+    '<input type="date" data-gal="to" value="' + esc(g.to) + '" aria-label="ถึงวันที่">' +
+    '<select data-gal="sort" aria-label="เรียงลำดับ"><option value="desc"' + (g.sort === 'desc' ? ' selected' : '') + '>ใหม่ไปเก่า</option><option value="asc"' + (g.sort === 'asc' ? ' selected' : '') + '>เก่าไปใหม่</option></select>' +
+    '</div><div id="galBody"></div></div></div>' +
+    (S.admin ? '<div id="tabForm"' + (S.tab === 'form' ? '' : ' hidden') + '>' + formHtml(yrs) + '</div>' : '');
+  drawGallery(); drawPreviews();
+}
+function filteredRecs() {
+  const g = S.gal, q = g.q.trim().toLowerCase();
+  return S.records.filter(r => (!q || (String(r.Title) + ' ' + String(r.Detail)).toLowerCase().indexOf(q) >= 0) &&
+    (!g.type || r.Type === g.type) && (!g.cat || r.Category === g.cat) && (!g.year || String(r.AcademicYear) === g.year) &&
+    (!g.from || String(r.StartDate) >= g.from) && (!g.to || String(r.StartDate) <= g.to))
+    .sort((a, b) => String(a.StartDate).localeCompare(String(b.StartDate)) * (g.sort === 'asc' ? 1 : -1));
+}
+function drawGallery() {
+  const box = $('#galBody'); if (!box) return;
+  const all = filteredRecs(), pages = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
+  S.gal.page = Math.min(S.gal.page, pages);
+  const part = all.slice((S.gal.page - 1) * PAGE_SIZE, S.gal.page * PAGE_SIZE);
+  let pg = '';
+  if (pages > 1) { pg = '<div class="pager">'; for (let i = 1; i <= pages; i++) pg += '<button data-act="gpage" data-p="' + i + '" class="' + (i === S.gal.page ? 'on' : '') + '">' + i + '</button>'; pg += '</div>'; }
+  box.innerHTML = part.length ? '<div class="gal">' + part.map(recCard).join('') + '</div>' + pg : '<div class="empty"><div class="big">🔎</div><p>ไม่พบภาพกิจกรรมตามเงื่อนไขการค้นหา</p></div>';
+}
+function viewRec(id) {
+  const r = S.records.find(x => String(x.ID) === String(id)); if (!r) return;
+  const ims = parseJ(r.Images), docs = parseJ(r.Docs);
+  const row = (k, val) => val ? '<dt>' + k + '</dt><dd>' + esc(val).replace(/\n/g, '<br>') + '</dd>' : '';
+  openModal(r.Title,
+    (ims.length ? '<div class="thumbs">' + ims.map((x, i) => '<img src="' + esc(thumb(x.id, 300)) + '" alt="' + esc(x.name) + '" data-act="openlb" data-id="' + esc(r.ID) + '" data-i="' + i + '">').join('') + '</div>' : '') +
+    '<dl class="kv">' + row('วันที่', fmtDate(r.StartDate) + (r.EndDate && r.EndDate !== r.StartDate ? ' – ' + fmtDate(r.EndDate) : '')) + row('ปีงบประมาณ', r.AcademicYear) + row('สถานที่', r.Location) +
+    row('ประเภท', r.Type) + row('หมวดหมู่', r.Category) + row('รายละเอียด', r.Detail) + row('ผลที่เกิดขึ้น', r.Result) + row('รหัส (ID)', r.ID) + row('บันทึกเมื่อ', r.CreatedAt) + row('แก้ไขล่าสุด', r.UpdatedAt) + '</dl>' +
+    (docs.length ? '<h4 style="margin:14px 0 6px">เอกสารหลักฐาน</h4>' + docs.map(d => '<div><a href="' + esc(viewUrl(d.id)) + '" target="_blank" rel="noopener">📄 ' + esc(d.name) + '</a></div>').join('') : ''),
+    (ims.length ? '<a class="btn ghost" href="' + esc(viewUrl(ims[0].id)) + '" target="_blank" rel="noopener" style="text-decoration:none">เปิดต้นฉบับใน Drive</a>' : '') +
+    (S.admin ? '<button class="btn ghost" data-act="editrec" data-id="' + esc(r.ID) + '">แก้ไข</button><button class="btn danger" data-act="delrec" data-id="' + esc(r.ID) + '">ลบ</button>' : '') + '<button class="btn" data-act="close">ปิด</button>', true);
+}
+
+/* ----- Record form ----- */
+function formHtml(yrs) {
+  const sel = (k, arr) => '<select data-rf="' + k + '"><option value="">เลือก...</option>' + arr.map(x => '<option>' + esc(x) + '</option>').join('') + '</select>';
+  return '<div class="card"><div class="row no-print" style="margin-bottom:14px"><input type="text" id="srchId" placeholder="ค้นหารายการเดิมจาก ID เพื่อแก้ไข" style="max-width:340px"><button class="btn ghost sm" data-act="loadid">โหลดรายการ</button><span class="chip" id="editBadge" hidden></span></div>' +
+    '<div class="field"><label class="f">ชื่อกิจกรรม <span class="req">*</span></label><input type="text" data-rf="Title" maxlength="200"></div>' +
+    '<div class="grid2"><div class="field"><label class="f">วันที่เริ่มกิจกรรม <span class="req">*</span></label><input type="date" data-rf="StartDate"></div>' +
+    '<div class="field"><label class="f">วันที่สิ้นสุด</label><input type="date" data-rf="EndDate"></div>' +
+    '<div class="field"><label class="f">ปีงบประมาณ <span class="req">*</span></label><input type="text" data-rf="AcademicYear" list="yrList" value="' + esc(S.settings.academicYear) + '"><datalist id="yrList">' + yrs.map(y => '<option value="' + esc(y) + '">').join('') + '</datalist></div>' +
+    '<div class="field"><label class="f">สถานที่จัดกิจกรรม</label><input type="text" data-rf="Location"></div>' +
+    '<div class="field"><label class="f">ประเภทกิจกรรม</label>' + sel('Type', TYPES) + '</div><div class="field"><label class="f">หมวดหมู่</label>' + sel('Category', CATS) + '</div></div>' +
+    '<div class="field"><label class="f">รายละเอียดกิจกรรม</label><textarea data-rf="Detail"></textarea></div>' +
+    '<div class="field"><label class="f">ผลที่เกิดขึ้นจากกิจกรรม</label><textarea data-rf="Result"></textarea></div>' +
+    '<div class="field"><label class="f">ภาพกิจกรรม (เลือกได้หลายภาพ)</label><input type="file" id="fImg" accept="image/*" multiple><div class="pv-list" id="imgPrev"></div></div>' +
+    '<div class="field"><label class="f">เอกสารหลักฐาน (PDF หรือเอกสาร)</label><input type="file" id="fDoc" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx" multiple><div class="pv-list" id="docPrev"></div></div>' +
+    '<div class="row"><button class="btn" id="btnSave" data-act="saverec">💾 บันทึก</button><button class="btn ghost" data-act="cancelrec">ยกเลิก</button><button class="btn ghost" data-act="clearrec">ล้างฟอร์ม</button></div>' +
+    '<div class="status" id="rfStatus"></div></div>';
+}
+function resetForm() {
+  S.form = { id: '', newImages: [], newDocs: [], oldImages: [], oldDocs: [] };
+  $$('[data-rf]').forEach(e => { e.value = e.dataset.rf === 'AcademicYear' ? (S.settings.academicYear || '') : ''; });
+  const f1 = $('#fImg'), f2 = $('#fDoc'); if (f1) f1.value = ''; if (f2) f2.value = '';
+  const b = $('#editBadge'); if (b) b.hidden = true;
+  const st = $('#rfStatus'); if (st) st.textContent = '';
+  drawPreviews();
+}
+function drawPreviews() {
+  const a = $('#imgPrev'), b = $('#docPrev'); if (!a || !b) return;
+  const F = S.form;
+  a.innerHTML = F.oldImages.map((x, i) => '<div class="pv"><img src="' + esc(thumb(x.id, 200)) + '" alt="">' + '<button data-act="rmold" data-k="oldImages" data-i="' + i + '" aria-label="ลบ">✕</button></div>').join('') +
+    F.newImages.map((x, i) => '<div class="pv"><img src="' + esc(x.preview) + '" alt="">' + '<button data-act="rmnew" data-k="newImages" data-i="' + i + '" aria-label="ลบ">✕</button></div>').join('');
+  b.innerHTML = F.oldDocs.map((x, i) => '<div class="pv">📄 ' + esc(x.name) + '<button data-act="rmold" data-k="oldDocs" data-i="' + i + '" aria-label="ลบ">✕</button></div>').join('') +
+    F.newDocs.map((x, i) => '<div class="pv">📄 ' + esc(x.name) + '<button data-act="rmnew" data-k="newDocs" data-i="' + i + '" aria-label="ลบ">✕</button></div>').join('');
+}
+function loadRec(id) {
+  const r = S.records.find(x => String(x.ID) === String(id.trim()));
+  if (!r) { toast('ไม่พบรายการตาม ID ที่ระบุ', 'err'); return; }
+  S.tab = 'form'; if (S.page !== 'activities') { S.page = 'activities'; renderChrome(); }
+  render(); resetForm();
+  $$('[data-rf]').forEach(e => { e.value = r[e.dataset.rf] == null ? '' : r[e.dataset.rf]; });
+  S.form.id = String(r.ID); S.form.oldImages = parseJ(r.Images); S.form.oldDocs = parseJ(r.Docs);
+  const b = $('#editBadge'); b.hidden = false; b.textContent = 'กำลังแก้ไข ID: ' + r.ID;
+  drawPreviews(); closeModal();
+}
+function readFile(file, isImg) {
+  return new Promise((resolve, reject) => {
+    const fr = new FileReader();
+    fr.onerror = () => reject(new Error('อ่านไฟล์ไม่สำเร็จ'));
+    fr.onload = () => {
+      if (!isImg) { resolve({ name: file.name, mime: file.type || 'application/octet-stream', data: String(fr.result).split(',')[1] }); return; }
+      const im = new Image();
+      im.onerror = () => reject(new Error('ไฟล์ภาพไม่ถูกต้อง'));
+      im.onload = () => {
+        const mx = 1600, k = Math.min(1, mx / Math.max(im.width, im.height));
+        const c = document.createElement('canvas'); c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+        c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+        const url = c.toDataURL('image/jpeg', 0.85);
+        resolve({ name: file.name.replace(/\.\w+$/, '') + '.jpg', mime: 'image/jpeg', data: url.split(',')[1], preview: url });
+      };
+      im.src = String(fr.result);
+    };
+    fr.readAsDataURL(file);
+  });
+}
+async function addFiles(input, key, isImg) {
+  const files = Array.from(input.files || []);
+  loading(true, 'กำลังเตรียมไฟล์...');
+  try {
+    for (const f of files) {
+      if (f.size > 8 * 1024 * 1024) { toast('ไฟล์ ' + f.name + ' ใหญ่เกิน 8 MB', 'err'); continue; }
+      S.form[key].push(await readFile(f, isImg));
+    }
+  } catch (e) { toast(e.message || 'เกิดข้อผิดพลาด', 'err'); }
+  loading(false); input.value = ''; drawPreviews();
+}
+function saveRec() {
+  if (S.busy) return;
+  const d = {};
+  $$('[data-rf]').forEach(e => { d[e.dataset.rf] = e.value.trim(); });
+  const st = $('#rfStatus');
+  if (!d.Title || !d.StartDate || !d.AcademicYear) { toast('กรุณากรอกข้อมูลให้ครบ', 'err'); st.textContent = 'กรุณากรอกชื่อกิจกรรม วันที่เริ่ม และปีงบประมาณ'; return; }
+  if (d.EndDate && d.EndDate < d.StartDate) { toast('วันที่สิ้นสุดต้องไม่ก่อนวันที่เริ่ม', 'err'); return; }
+  d.ID = S.form.id;
+  d.keepImages = S.form.oldImages.map(x => x.id); d.keepDocs = S.form.oldDocs.map(x => x.id);
+  d.newImages = S.form.newImages.map(x => ({ name: x.name, mime: x.mime, data: x.data }));
+  d.newDocs = S.form.newDocs;
+  S.busy = true; $('#btnSave').disabled = true;
+  const n = d.newImages.length + d.newDocs.length;
+  st.textContent = n ? 'กำลังอัปโหลด ' + n + ' ไฟล์ และบันทึกข้อมูล...' : 'กำลังบันทึกข้อมูล...';
+  api('saveRecord', [d, S.pwd], n ? 'กำลังอัปโหลดไฟล์...' : 'กำลังบันทึก...').then(r => {
+    if (check(r)) {
+      S.records = r.records; toast(r.msg, 'ok'); resetForm(); S.tab = 'gallery'; render();
+    } else if (st) st.textContent = (r && r.msg) || 'เกิดข้อผิดพลาด';
+  }).catch(() => { if (st) st.textContent = 'เกิดข้อผิดพลาด กรุณาลองใหม่'; })
+    .then(() => { S.busy = false; const b = $('#btnSave'); if (b) b.disabled = false; });
+}
+
+/* ===== Admin: login / items ===== */
+function loginModal(next) {
+  openModal('เข้าสู่โหมดผู้ดูแลระบบ', '<div class="field"><label class="f">รหัสผู้ดูแลระบบ</label><input type="password" id="pwdIn" autocomplete="off" data-next="' + esc(next || '') + '"></div>',
+    '<button class="btn ghost" data-act="close">ยกเลิก</button><button class="btn" data-act="dologin">เข้าสู่ระบบ</button>');
+  setTimeout(() => { const e = $('#pwdIn'); if (e) e.focus(); }, 50);
+}
+function doLogin() {
+  const e = $('#pwdIn'); if (!e) return;
+  const pwd = e.value, next = e.dataset.next;
+  api('verifyAdminPassword', [pwd], 'กำลังตรวจสอบ...').then(ok => {
+    if (ok === true) { S.admin = true; S.pwd = pwd; closeModal(); renderChrome(); go(next || S.page); toast('เข้าสู่โหมดผู้ดูแลแล้ว', 'ok'); }
+    else toast('รหัสผู้ดูแลระบบไม่ถูกต้อง', 'err');
+  }).catch(() => {});
+}
+function logout(silent) {
+  S.admin = false; S.pwd = ''; applySaved();
+  if (S.page === 'settings') S.page = 'home';
+  renderChrome(); render(); if (!silent) toast('ออกจากโหมดผู้ดูแลแล้ว', 'ok');
+}
+const ITEMS = {
+  staff: { title: 'บุคลากร', f: [['Name', 'ชื่อ-สกุล', 'text', 1], ['Position', 'ตำแหน่งงาน', 'text'], ['Phone', 'เบอร์โทรศัพท์', 'text'], ['Dept', 'กลุ่มงาน', 'dept', 1], ['Group', 'แผนก/หน่วยงาน', 'group'], ['Division', 'สายงาน', 'div'], ['Homeroom', 'จุดบริการที่ประจำ (เช่น หอผู้ป่วยใน 1, ER)', 'text'], ['Role', 'บทบาทในแผนผัง', 'role', 1], ['SortOrder', 'ลำดับการแสดง (เลขน้อยขึ้นก่อน)', 'number'], ['PhotoURL', 'รูปภาพ', 'img']] },
+  cmd: { title: 'ทำเนียบผู้บังคับบัญชา', f: [['Name', 'ยศ ชื่อ-สกุล', 'text', 1], ['Position', 'ตำแหน่ง (เช่น ผู้อำนวยการโรงพยาบาลกองบิน 5)', 'text'], ['Term', 'ช่วงดำรงตำแหน่ง (เช่น 2565 – 2567 ; คนปัจจุบันพิมพ์ 2568 – ปัจจุบัน)', 'text'], ['SortOrder', 'ลำดับการแสดง (เลขน้อยขึ้นก่อน — คนปัจจุบันใส่ 1)', 'number'], ['PhotoURL', 'รูปภาพ', 'img']] },
+  campus: { title: 'สถานที่ในโรงพยาบาล', f: [['Name', 'ชื่อสถานที่', 'text', 1], ['PhotoURL', 'รูปภาพ', 'img']] },
+  banner: { title: 'ข่าวสาร & ประกาศ', f: [['Title', 'หัวข้อข่าว/ประกาศ', 'text'], ['PhotoURL', 'รูปภาพ', 'img', 1]] },
+  link: { title: 'เว็บไซต์ที่เกี่ยวข้อง', f: [['Name', 'ชื่อเว็บไซต์/หน่วยงาน', 'text', 1], ['URL', 'ที่อยู่เว็บไซต์ (URL)', 'text', 1], ['LogoURL', 'โลโก้ (ไม่บังคับ)', 'img'], ['SortOrder', 'ลำดับการแสดง (เลขน้อยขึ้นก่อน)', 'number']] },
+  award: { title: 'ผลงานและรางวัล', f: [['Title', 'ชื่อผลงาน/รางวัล', 'text', 1], ['Year', 'ปี/วันที่ที่ได้รับ (เช่น 2569)', 'text'], ['Detail', 'รายละเอียด', 'area'], ['PhotoURL', 'รูปภาพ', 'img'], ['SortOrder', 'ลำดับการแสดง (เลขน้อยขึ้นก่อน)', 'number']] },
+  pr: { title: 'ข่าวประชาสัมพันธ์', f: [['Title', 'หัวข้อข่าวประชาสัมพันธ์', 'text', 1], ['Date', 'วันที่', 'date'], ['Detail', 'คำอธิบายสั้น ๆ (แสดงใต้รูป)', 'area'], ['PhotoURL', 'รูปภาพ', 'img'], ['SortOrder', 'ลำดับการแสดง (เลขน้อยขึ้นก่อน)', 'number']] }
+};
+function imgField(id, label, val, req) {
+  return '<div class="field"><label class="f">' + label + (req ? ' <span class="req">*</span>' : '') + '</label><div class="row" style="flex-wrap:nowrap"><img class="prev-img" id="pv_' + id + '" src="' + esc(safeUrl(val) || PH) + '" alt="">' +
+    '<div style="flex:1;min-width:0"><input type="text" id="' + id + '" data-prev="pv_' + id + '" placeholder="วางลิงก์รูป หรืออัปโหลดไฟล์" value="' + esc(val) + '"><input type="file" accept="image/*" data-upload="' + id + '" style="margin-top:6px"></div></div></div>';
+}
+function itemModal(t, id) {
+  const cfg = ITEMS[t], cur = id ? (S[LIST[t]].find(x => String(x.ID) === String(id)) || {}) : {};
+  const body = cfg.f.map(f => {
+    let val = cur[f[0]] == null ? '' : cur[f[0]];
+    if (!id && t === 'pr' && f[0] === 'Date' && !val) val = new Date().toISOString().slice(0, 10); /* ข่าวใหม่: ใส่วันที่วันนี้ให้ก่อน */
+    if (f[2] === 'img') return imgField('it_' + f[0], f[1], val, f[3]);
+    if (f[2] === 'area') return '<div class="field"><label class="f">' + f[1] + (f[3] ? ' <span class="req">*</span>' : '') + '</label><textarea data-it="' + f[0] + '">' + esc(val) + '</textarea></div>';
+    if (f[2] === 'dept' || f[2] === 'group' || f[2] === 'div') {
+      /* รายการที่ผู้ดูแลเพิ่มเองได้: มีปุ่ม "+ เพิ่มใหม่" ข้างชื่อช่อง */
+      return '<div class="field"><label class="f">' + f[1] + (f[3] ? ' <span class="req">*</span>' : '') +
+        ' <button type="button" class="btn out sm lbl-add" data-act="quickadd" data-k="' + f[2] + '">+ เพิ่มใหม่</button></label>' +
+        '<select data-it="' + f[0] + '">' + selOptions(f[2], val) + '</select></div>';
+    }
+    if (f[2] === 'role') {
+      const cv = val || 'member';
+      return '<div class="field"><label class="f">' + f[1] + (f[3] ? ' <span class="req">*</span>' : '') + '</label><select data-it="' + f[0] + '">' +
+        ROLES.map(x => '<option value="' + esc(x[0]) + '"' + (cv === x[0] ? ' selected' : '') + '>' + esc(x[1]) + '</option>').join('') + '</select></div>';
+    }
+    return '<div class="field"><label class="f">' + f[1] + (f[3] ? ' <span class="req">*</span>' : '') + '</label><input type="' + f[2] + '" data-it="' + f[0] + '" value="' + esc(val) + '"' + (f[2] === 'number' ? ' min="0"' : '') + '></div>';
+  }).join('');
+  openModal((id ? 'แก้ไข' : 'เพิ่ม') + cfg.title, body, '<button class="btn ghost" data-act="close">ยกเลิก</button><button class="btn" data-act="saveitem" data-t="' + t + '" data-id="' + esc(id || '') + '">บันทึก</button>');
+}
+function saveItem(t, id) {
+  const cfg = ITEMS[t], item = { ID: id || '' };
+  for (const f of cfg.f) {
+    const el = f[2] === 'img' ? $('#it_' + f[0]) : $('[data-it="' + f[0] + '"]');
+    const val = el ? el.value.trim() : '';
+    if (f[3] && !val) { toast('กรุณากรอกข้อมูลให้ครบ', 'err'); return; }
+    item[f[0]] = val;
+  }
+  if (t === 'link') {
+    const u = safeLink(item.URL);
+    if (!u) { toast('ที่อยู่เว็บไซต์ไม่ถูกต้อง', 'err'); return; }
+    item.URL = u;
+  }
+  api('saveItem', [t, item, S.pwd], 'กำลังบันทึก...').then(r => {
+    if (check(r)) { S[LIST[t]] = r.list; closeModal(); toast(r.msg, 'ok'); render(); }
+  }).catch(() => {});
+}
+function delItem(t, id) {
+  if (!confirm('ยืนยันการลบข้อมูลนี้?')) return;
+  api('deleteItem', [t, id, S.pwd], 'กำลังลบ...').then(r => {
+    if (check(r)) { S[LIST[t]] = r.list; closeModal(); toast(r.msg, 'ok'); render(); }
+  }).catch(() => {});
+}
+function uploadTo(inputId, file) {
+  if (!file) return;
+  readFile(file, true).then(f => api('uploadImage', [{ name: f.name, mime: f.mime, data: f.data }, S.pwd], 'กำลังอัปโหลดไฟล์...').then(r => {
+    if (check(r)) {
+      const el = $('#' + inputId); el.value = r.url; el.dispatchEvent(new Event('input', { bubbles: true })); toast(r.msg, 'ok');
+    }
+  })).catch(e => { if (e && e.message) toast(e.message, 'err'); });
+}
+
+/* ----- Settings ----- */
+const hexField = (id, val) => '<input type="text" class="hexin" data-hex="' + id + '" value="' + esc(val) + '" maxlength="7" placeholder="#RRGGBB" aria-label="รหัสสี (HEX)" spellcheck="false" autocomplete="off">';
+const colorField = (id, label, val) => '<div class="field"><label class="f">' + label + '</label><div class="row" style="flex-wrap:nowrap"><input type="color" id="' + id + '" value="' + esc(val) + '">' + hexField(id, val) + '</div></div>';
+function setColor(id, v) {
+  const c = $('#' + id); if (c) c.value = v;
+  const h = $('[data-hex="' + id + '"]'); if (h) { h.value = v; h.style.borderColor = ''; }
+}
+function onHex(t) {
+  let v = t.value.trim();
+  if (v && v[0] !== '#') v = '#' + v;
+  if (/^#[0-9a-f]{3}$/i.test(v)) v = '#' + v.slice(1).split('').map(x => x + x).join('');
+  if (/^#[0-9a-f]{6}$/i.test(v)) { $('#' + t.dataset.hex).value = v.toLowerCase(); t.style.borderColor = ''; liveTheme(); }
+  else t.style.borderColor = '#d6293b';
+}
+/* ----- ลิงก์เว็บไซต์ที่เกี่ยวข้อง ----- */
+function safeLink(u) {
+  u = String(u || '').trim();
+  if (!u) return '';
+  if (!/^https?:\/\//i.test(u)) u = 'https://' + u;
+  try { const x = new URL(u); return /^https?:$/.test(x.protocol) ? x.href : ''; } catch (e) { return ''; }
+}
+/* ----- เปลี่ยนรหัสผู้ดูแลระบบ ----- */
+function changePwd() {
+  const o = $('#pwOld').value, n = $('#pwNew').value, n2 = $('#pwNew2').value;
+  if (!o || !n || !n2) { toast('กรุณากรอกข้อมูลให้ครบ', 'err'); return; }
+  if (n.length < 4) { toast('รหัสผ่านใหม่ต้องยาวอย่างน้อย 4 ตัวอักษร', 'err'); return; }
+  if (n !== n2) { toast('รหัสผ่านใหม่และการยืนยันไม่ตรงกัน', 'err'); return; }
+  api('changeAdminPassword', [o, n], 'กำลังเปลี่ยนรหัสผ่าน...').then(r => {
+    if (r && r.ok) { S.pwd = n; ['pwOld', 'pwNew', 'pwNew2'].forEach(id => { $('#' + id).value = ''; }); toast(r.msg, 'ok'); }
+    else toast((r && r.msg) || 'เกิดข้อผิดพลาด', 'err');
+  }).catch(() => {});
+}
+function pSettings(v) {
+  const s = S.settings;
+  const cS = col(s.sidebarColor, 'sidebar'), cP = col(s.primaryColor, 'primary'), cB = col(s.bgColor, 'bg');
+  const tx = (k, label, ph) => '<div class="field"><label class="f">' + label + '</label><input type="text" data-s="' + k + '" value="' + esc(s[k]) + '"' + (ph ? ' placeholder="' + ph + '"' : '') + '></div>';
+  const ta = (k, label) => '<div class="field"><label class="f">' + label + '</label><textarea data-s="' + k + '" style="min-height:110px">' + esc(s[k]) + '</textarea></div>';
+  v.innerHTML = '<div class="page-title"><h2>⚙️ ตั้งค่าระบบ</h2><div class="row"><button class="btn" data-act="savesettings">💾 บันทึกการตั้งค่า</button><button class="btn ghost" data-act="logout">ออกจากโหมดผู้ดูแล</button></div></div>' +
+    '<div class="card set-sec"><h3>1. ข้อมูลทั่วไป</h3><div class="grid2">' + tx('systemName', 'ชื่อระบบ') + tx('orgName', 'ชื่อโรงพยาบาล/หน่วยงาน') + tx('affiliation', 'สังกัด') + tx('academicYear', 'ปีงบประมาณ') + tx('welcomeText', 'ข้อความต้อนรับ') + '</div>' +
+    '<div class="field"><label class="f">ที่อยู่</label><textarea data-s="address">' + esc(s.address) + '</textarea></div></div>' +
+    '<div class="card set-sec"><h3>2. ข้อมูลผู้บริหาร</h3><div class="grid2">' + tx('execName', 'ชื่อผู้บริหาร') + tx('execPosition', 'ตำแหน่ง') + '</div>' + imgField('s_execPhotoUrl', 'รูปผู้บริหาร (แสดงที่คอลัมน์ซ้ายของหน้าหลัก)', s.execPhotoUrl) + '</div>' +
+    '<div class="card set-sec"><h3>3. การตกแต่งเว็บไซต์</h3>' +
+    imgField('s_heroBgUrl', 'อัปโหลดรูปหน้าปก (รูปโรงพยาบาล — แสดงเป็นสไลด์แรก)', s.heroBgUrl) + imgField('s_logoUrl', 'อัปโหลดโลโก้ (ตราโรงพยาบาล)', s.logoUrl) +
+    '<div class="field"><label class="f">สีหลัก (หัวข้อ / ส่วนท้าย / ปุ่ม)</label><div class="presets"><input type="color" id="cSidebar" value="' + esc(cS) + '" aria-label="สีหลัก">' + hexField('cSidebar', cS) +
+    PRESETS.map(c => '<button class="sw" type="button" data-act="preset" data-c="' + c + '" style="background:' + c + '" aria-label="สี ' + c + '"></button>').join('') + '</div></div>' +
+    '<div class="grid2">' + colorField('cPrimary', 'สีเน้น (ปุ่มไฮไลต์ / ตัวอักษรเน้น)', cP) + colorField('cBg', 'สีพื้นหลัง', cB) + '</div>' +
+    '<div class="field"><label class="f">ตัวอย่าง (เปลี่ยนตามสีที่เลือกทันที)</label><div class="mini">' +
+    '<div class="mini-h"><span>' + esc(s.orgName) + '</span><span>หน้าหลัก · ข่าวสาร</span></div><div class="mini-hero">ยินดีต้อนรับ<span>' + esc(s.orgName) + '</span></div>' +
+    '<div class="mini-body"><button class="btn gold sm" type="button">ปุ่มเน้น</button><button class="btn sm" type="button">ปุ่มหลัก</button><span>พื้นหลังหน้าเว็บ</span></div></div></div>' +
+    '<button class="btn ghost sm" data-act="resetcolor">คืนค่าสีเริ่มต้นทั้งหมด</button></div>' +
+    '<div class="card set-sec"><h3>4. ข้อมูลโรงพยาบาล</h3>' + ta('history', 'ประวัติโรงพยาบาล') + tx('motto', 'คำขวัญ') +
+    tx('schoolColors', 'สีประจำหน่วย (ชื่อสี เช่น ฟ้า-ขาว)') + '<div class="grid2">' + tx('schoolColor1', 'รหัสสีที่ 1 (ไม่บังคับ เช่น #2f8cff)') + tx('schoolColor2', 'รหัสสีที่ 2 (ไม่บังคับ)') + '</div>' +
+    ta('identity', 'อัตลักษณ์') + ta('vision', 'วิสัยทัศน์') + ta('mission', 'พันธกิจ') + ta('goals', 'เป้าหมาย') + ta('policy', 'นโยบายโรงพยาบาล') +
+    '<h4 style="margin:18px 0 8px">นโยบายเจ้ากรมแพทย์ทหารอากาศ</h4><div class="grid2">' + tx('dmdName', 'ยศ ชื่อ-สกุล เจ้ากรมแพทย์ทหารอากาศ') + tx('dmdPosition', 'ตำแหน่ง', 'เจ้ากรมแพทย์ทหารอากาศ') + '</div>' +
+    imgField('s_dmdPhotoUrl', 'รูปเจ้ากรมแพทย์ทหารอากาศ (ไม่บังคับ)', s.dmdPhotoUrl) + ta('dmdPolicy', 'ข้อความนโยบาย') + tx('dmdLink', 'ลิงก์เอกสารนโยบายฉบับเต็ม (ไม่บังคับ เช่น ลิงก์ไฟล์ PDF)', 'https://...') +
+    '<p class="map-hint">ทำเนียบผู้บังคับบัญชา: ไปที่หน้า "ข้อมูลโรงพยาบาล" แท็บ "ทำเนียบผู้บังคับบัญชา" แล้วกด "+ เพิ่มรายชื่อผู้บังคับบัญชา"</p>' +
+    '<p class="map-hint">ต้องการเพิ่มหมวดหมู่ข้อมูลอื่น ๆ เอง: ไปที่หน้า "ข้อมูลโรงพยาบาล" แล้วกด "+ เพิ่มหมวดหมู่"</p></div>' +
+    '<div class="card set-sec"><h3>5. เปลี่ยนรหัสผู้ดูแลระบบ</h3><div class="grid2"><div class="field"><label class="f">รหัสผ่านเดิม</label><input type="password" id="pwOld" autocomplete="off"></div><div></div>' +
+    '<div class="field"><label class="f">รหัสผ่านใหม่ (อย่างน้อย 4 ตัวอักษร)</label><input type="password" id="pwNew" autocomplete="new-password"></div>' +
+    '<div class="field"><label class="f">ยืนยันรหัสผ่านใหม่</label><input type="password" id="pwNew2" autocomplete="new-password"></div></div>' +
+    '<button class="btn" data-act="changepwd">🔑 เปลี่ยนรหัสผ่าน</button></div>' +
+    '<div class="card set-sec"><h3>6. ข้อมูลติดต่อและแผนที่</h3><div class="grid2">' + tx('phone', 'โทรศัพท์') + tx('emergencyPhone', 'เบอร์ฉุกเฉิน / ห้องฉุกเฉิน') + tx('openHours', 'เวลาทำการ (เช่น ผู้ป่วยนอก จ.-ศ. 08.00-16.00 น.)') + tx('email', 'อีเมล') + tx('lineId', 'LINE (ไอดี เช่น @school หรือลิงก์)') + tx('facebookUrl', 'Facebook (ลิงก์เพจ)', 'https://facebook.com/...') + '</div>' +
+    '<label class="f">ปักหมุดตำแหน่งโรงพยาบาล</label><p class="map-hint">คลิกบนแผนที่เพื่อปักหมุด หรือลากหมุดเพื่อปรับตำแหน่ง (ที่อยู่ตามข้อมูลทั่วไปจะแสดงในหน้าติดต่อเรา)</p>' +
+    '<div class="map-box pick" id="pickMap"></div><div class="grid2" style="margin-top:12px">' + tx('mapLat', 'ละติจูด (Latitude)', '13.756300') + tx('mapLng', 'ลองจิจูด (Longitude)', '100.501800') + '</div>' +
+    '<div class="row"><button class="btn ghost sm" type="button" data-act="mypos">ใช้ตำแหน่งปัจจุบันของฉัน</button><button class="btn danger sm" type="button" data-act="clearpin">ล้างหมุด</button></div></div>' +
+    '<div class="card set-sec"><h3>7. จัดการรายการหมวดหมู่บุคลากร / เอกสาร</h3><p class="map-hint" style="margin-top:0">เพิ่ม ลบ และเรียงลำดับรายการที่ใช้ในหน้าบุคลากรและหน้าเอกสาร (บันทึกทันทีเมื่อกด "บันทึก" ในหน้าต่างจัดการ)</p><div class="row">' +
+    Object.keys(LISTCFG).map(k => '<button class="btn ghost sm" type="button" data-act="manage" data-k="' + k + '">⚙ ' + esc(LISTCFG[k].title) + '</button>').join('') + '</div></div>' +
+    '<div class="card set-sec"><h3>รายงาน</h3>' + tx('reportHeader', 'ชื่อหัวรายงาน') + tx('reportFooter', 'ข้อความท้ายรายงาน') + '</div>' +
+    '<div class="card set-sec"><div class="page-title" style="margin-bottom:10px"><h3>ข่าวสาร &amp; ประกาศ</h3><button class="btn sm" data-act="additem" data-t="banner">+ เพิ่มภาพ</button></div>' +
+    (S.banners.length ? '<div class="gal">' + S.banners.map(b => '<div class="gc" style="cursor:default"><div class="im">' + img(b.PhotoURL, b.Title) + '</div><div class="tx"><b>' + esc(b.Title || '(ไม่มีชื่อ)') + '</b><div class="row" style="margin-top:8px"><button class="btn ghost sm" data-act="edititem" data-t="banner" data-id="' + esc(b.ID) + '">แก้ไข</button><button class="btn danger sm" data-act="delitem" data-t="banner" data-id="' + esc(b.ID) + '">ลบ</button></div></div></div>').join('') + '</div>' : emptyHtml('🗓️', 'ยังไม่มีข่าวสาร/ประกาศ')) + '</div>';
+  initMap('pickMap', mapNum(s.mapLat), mapNum(s.mapLng), true, (la, ln) => {
+    const a = $('[data-s="mapLat"]'), b = $('[data-s="mapLng"]');
+    if (a) a.value = la.toFixed(6); if (b) b.value = ln.toFixed(6);
+  });
+}
+function saveSettings() {
+  const d = {};
+  $$('[data-s]').forEach(e => { d[e.dataset.s] = e.value.trim(); });
+  ['logoUrl', 'heroBgUrl', 'execPhotoUrl', 'dmdPhotoUrl'].forEach(k => { d[k] = ($('#s_' + k) || { value: '' }).value.trim(); });
+  d.primaryColor = $('#cPrimary').value; d.sidebarColor = $('#cSidebar').value; d.bgColor = $('#cBg').value; d.buttonColor = d.sidebarColor;
+  if (!d.systemName || !d.orgName) { toast('กรุณากรอกข้อมูลให้ครบ', 'err'); return; }
+  for (const k of ['schoolColor1', 'schoolColor2']) {
+    if (d[k] && !/^#[0-9a-f]{6}$/i.test(d[k])) { toast('รหัสสีต้องเป็นรูปแบบ #RRGGBB เช่น #2f8cff', 'err'); return; }
+  }
+  const la = d.mapLat, ln = d.mapLng;
+  if (la || ln) {
+    const a = mapNum(la), b = mapNum(ln);
+    if (a == null || b == null) { toast('กรุณากรอกละติจูดและลองจิจูดให้ครบทั้งคู่ (เป็นตัวเลข)', 'err'); return; }
+    if (a < -90 || a > 90 || b < -180 || b > 180) { toast('พิกัดไม่ถูกต้อง', 'err'); return; }
+  }
+  api('saveSettings', [d, S.pwd], 'กำลังบันทึกการตั้งค่า...').then(r => {
+    if (!check(r)) return;
+    return api('getBootstrap', [], 'กำลังโหลดการตั้งค่าใหม่...').then(b => { toast(r.msg, 'ok'); applyData(b); });
+  }).catch(() => {});
+}
+
+/* ===== Events ===== */
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]'); if (!el) { if (e.target.id === 'modalOv') closeModal(); return; }
+  const a = el.dataset.act, d = el.dataset;
+  switch (a) {
+    case 'nav': go(d.p); break;
+    case 'menu': $('#hnav').classList.toggle('open'); break;
+    case 'search': S.tab = 'gallery'; go('activities'); setTimeout(() => { const q = $('[data-gal="q"]'); if (q) q.focus(); }, 60); break;
+    case 'sview': S.sf.view = d.v; render(); break;
+    case 'viewban': viewBan(d.id); break;
+    case 'viewaward': viewAward(d.id); break;
+    case 'hcprev': hcStep(d.k, -1); break;
+    case 'hcnext': hcStep(d.k, 1); break;
+    case 'prprev': prStep(-1); break;
+    case 'prnext': prStep(1); break;
+    case 'viewpr': viewPr(d.id); break;
+    case 'hcopen': if (d.k === 'pr') viewPr(d.id); else viewRec(d.id); break;
+    case 'adddoc': docModal(''); break;
+    case 'editdoc': docModal(d.id); break;
+    case 'savedoc': saveDoc(d.id); break;
+    case 'rmdocfile': { S.docUp = null; const i = $('#docFileInfo'); if (i) i.innerHTML = docFileInfo(); const f = $('#docFile'); if (f) f.value = ''; break; }
+    case 'manage': manageList(d.k); break;
+    case 'quickadd': quickAdd(d.k); break;
+    case 'mladd': mlAdd(); break;
+    case 'mldel': S.ml.items.splice(Number(d.i), 1); drawML(); break;
+    case 'mlup': mlMove(Number(d.i), -1); break;
+    case 'mldown': mlMove(Number(d.i), 1); break;
+    case 'mlsave': mlSave(); break;
+    case 'clearpin': { ['mapLat', 'mapLng'].forEach(k => { const e = $('[data-s="' + k + '"]'); if (e) e.value = ''; }); if (S.mapClear) S.mapClear(); break; }
+    case 'mypos':
+      if (!navigator.geolocation) { toast('อุปกรณ์ไม่รองรับการระบุตำแหน่ง', 'err'); break; }
+      navigator.geolocation.getCurrentPosition(p => {
+        const la = p.coords.latitude, ln = p.coords.longitude;
+        const a = $('[data-s="mapLat"]'), b = $('[data-s="mapLng"]'); if (a) a.value = la.toFixed(6); if (b) b.value = ln.toFixed(6);
+        if (S.mapSet) S.mapSet(la, ln);
+      }, () => toast('ไม่สามารถอ่านตำแหน่งปัจจุบันได้', 'err'));
+      break;
+    case 'allawards': allAwards(); break;
+    case 'schtab': { S.sch.tab = d.k; S.sch.q = ''; drawSch(); break; }
+    case 'schgo': S.sch.tab = d.k; S.sch.q = ''; go('school'); break;
+    case 'addsec': secModal(''); break;
+    case 'editsec': secModal(d.id); break;
+    case 'savesec': saveSec(d.id); break;
+    case 'delsec': delSec(d.id); break;
+    case 'orgmode': S.org.mode = d.m; S.org.val = ''; render(); break;
+    case 'retry': boot(); break;
+    case 'close': closeModal(); break;
+    case 'login': loginModal(''); break;
+    case 'dologin': doLogin(); break;
+    case 'logout': logout(); break;
+    case 'heroprev': heroShow(S.hero - 1); startHero(); break;
+    case 'heronext': heroShow(S.hero + 1); startHero(); break;
+    case 'carprev': carShow(S.car - 1); startCar(); break;
+    case 'carnext': carShow(S.car + 1); startCar(); break;
+    case 'tab': S.tab = d.t; $('#tabGallery').hidden = d.t !== 'gallery'; $('#tabForm').hidden = d.t !== 'form'; $$('.tabs button').forEach(b => b.classList.toggle('on', b.dataset.t === d.t)); break;
+    case 'gpage': S.gal.page = Number(d.p); drawGallery(); break;
+    case 'viewrec': viewRec(d.id); break;
+    case 'openlb': { const r = S.records.find(x => String(x.ID) === String(d.id)); if (r) openLb(parseJ(r.Images), Number(d.i)); break; }
+    case 'lbprev': S.lb.i = (S.lb.i - 1 + S.lb.items.length) % S.lb.items.length; drawLb(); break;
+    case 'lbnext': S.lb.i = (S.lb.i + 1) % S.lb.items.length; drawLb(); break;
+    case 'lbclose': closeLb(); break;
+    case 'editrec': loadRec(d.id); break;
+    case 'delrec':
+      if (!confirm('ยืนยันการลบกิจกรรมนี้?')) break;
+      api('deleteRecord', [d.id, S.pwd], 'กำลังลบ...').then(r => { if (check(r)) { S.records = r.records; closeModal(); toast(r.msg, 'ok'); render(); } }).catch(() => {});
+      break;
+    case 'loadid': loadRec($('#srchId').value); break;
+    case 'saverec': saveRec(); break;
+    case 'cancelrec': resetForm(); S.tab = 'gallery'; render(); break;
+    case 'clearrec': resetForm(); break;
+    case 'rmold': S.form[d.k].splice(Number(d.i), 1); drawPreviews(); break;
+    case 'rmnew': S.form[d.k].splice(Number(d.i), 1); drawPreviews(); break;
+    case 'additem': itemModal(d.t, ''); break;
+    case 'edititem': itemModal(d.t, d.id); break;
+    case 'saveitem': saveItem(d.t, d.id); break;
+    case 'delitem': delItem(d.t, d.id); break;
+    case 'savesettings': saveSettings(); break;
+    case 'preset': setColor('cSidebar', d.c); liveTheme(); break;
+    case 'changepwd': changePwd(); break;
+    case 'resetcolor': setColor('cSidebar', DEF.sidebar); setColor('cPrimary', DEF.primary); setColor('cBg', DEF.bg); liveTheme(); break;
+    case 'print': window.print(); break;
+  }
+});
+document.addEventListener('input', e => {
+  const t = e.target;
+  if (t.dataset.gal) { S.gal[t.dataset.gal] = t.value; S.gal.page = 1; drawGallery(); }
+  else if (t.id === 'docQ') { S.dq.q = t.value; drawDocs(); }
+  else if (t.dataset.s === 'mapLat' || t.dataset.s === 'mapLng') {
+    const a = mapNum(($('[data-s="mapLat"]') || {}).value), b = mapNum(($('[data-s="mapLng"]') || {}).value);
+    if (a != null && b != null && Math.abs(a) <= 90 && Math.abs(b) <= 180 && S.mapSet) S.mapSet(a, b);
+  }
+  else if (t.id === 'cPrimary' || t.id === 'cSidebar' || t.id === 'cBg') { setColor(t.id, t.value); liveTheme(); }
+  else if (t.dataset.hex) onHex(t);
+  else if (t.dataset.prev) { const p = $('#' + t.dataset.prev); if (p) { p.dataset.fb = ''; p.src = safeUrl(t.value) || PH; } }
+});
+document.addEventListener('change', e => {
+  const t = e.target;
+  if (t.dataset.hex) { const c = $('#' + t.dataset.hex); if (c) { t.value = c.value; t.style.borderColor = ''; } }
+  else if (t.dataset.gal && t.tagName === 'SELECT') { S.gal[t.dataset.gal] = t.value; S.gal.page = 1; drawGallery(); }
+  else if (t.dataset.sf) { S.sf[t.dataset.sf] = t.value; render(); }
+  else if (t.dataset.dq) { S.dq[t.dataset.dq] = t.value; drawDocs(); }
+  else if (t.id === 'docFile') uploadDocFile(t.files[0]);
+  else if (t.dataset.org) { S.org.val = t.value; render(); }
+  else if (t.id === 'fImg') addFiles(t, 'newImages', true);
+  else if (t.id === 'fDoc') addFiles(t, 'newDocs', false);
+  else if (t.dataset.upload) uploadTo(t.dataset.upload, t.files[0]);
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { if (S.lb) closeLb(); else closeModal(); }
+  else if (S.lb && e.key === 'ArrowRight') { S.lb.i = (S.lb.i + 1) % S.lb.items.length; drawLb(); }
+  else if (S.lb && e.key === 'ArrowLeft') { S.lb.i = (S.lb.i - 1 + S.lb.items.length) % S.lb.items.length; drawLb(); }
+  else if (e.key === 'Enter' && e.target.id === 'pwdIn') doLogin();
+  else if (e.key === 'Enter' && e.target.id === 'mlIn') { e.preventDefault(); mlAdd(); }
+});
+window.addEventListener('beforeunload', () => { /* ไม่เก็บสถานะใด ๆ ลง Browser */ });
+
+renderChrome();
+boot();
+})();
+</script>
+</body>
+</html>
+
