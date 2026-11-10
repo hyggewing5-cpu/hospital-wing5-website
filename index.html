@@ -671,7 +671,8 @@ function rawCall(fn, args) {
     method: 'POST', redirect: 'follow',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' }, /* text/plain = ไม่ต้องทำ CORS preflight */
     body: JSON.stringify({ fn: fn, args: args })
-  }).then(r => { if (!r.ok) throw new Error('เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ (' + r.status + ')'); return r.json(); })
+  }).catch(() => { throw new Error('เชื่อมต่อ API ไม่ได้ — ตรวจว่า Deploy Web app เป็น New version, Who has access = Anyone และลิงก์ใน config.js ลงท้ายด้วย /exec'); })
+    .then(r => { if (!r.ok) throw new Error('เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ (' + r.status + ')'); return r.json(); })
     .then(res => { if (res && res.error) throw new Error(res.error); return res ? res.result : undefined; });
 }
 function api(fn, args, msg) {
