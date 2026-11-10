@@ -1180,8 +1180,13 @@ function saveSec(id) {
   persistSecs(arr, 'c_' + sid);
 }
 function persistHidden(arr, tab, msg) {
-  api('saveSettings', [{ hiddenSections: JSON.stringify(arr) }, S.pwd], 'กำลังบันทึก...').then(r => {
+  const want = JSON.stringify(arr);
+  api('saveSettings', [{ hiddenSections: want }, S.pwd], 'กำลังบันทึก...').then(r => {
     if (!check(r)) return;
+    /* เซิร์ฟเวอร์เก่าที่ไม่มีคีย์ hiddenSections จะตอบกลับโดยไม่มีค่านี้ -> แจ้งเตือนแทนที่จะทำเหมือนสำเร็จ */
+    if (!r.settings || String(r.settings.hiddenSections == null ? '' : r.settings.hiddenSections) !== (arr.length ? want : '[]') && !(arr.length === 0 && !r.settings.hiddenSections)) {
+      toast('บันทึกไม่สำเร็จ: Apps Script ยังเป็นเวอร์ชันเก่า — วาง Code.gs ใหม่แล้ว Deploy เป็น New version', 'err'); return;
+    }
     S.settings = r.settings || S.settings;
     if (tab) S.sch.tab = tab;
     toast(msg, 'ok'); render();
