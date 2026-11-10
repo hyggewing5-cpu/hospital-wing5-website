@@ -1067,8 +1067,12 @@ function getSecs() {
     return Array.isArray(v) ? v.filter(x => x && x.id && x.title) : [];
   } catch (e) { return []; }
 }
-const schList = () => SCH.concat(getSecs().map(c => ['c_' + c.id, 'star', c.title]));
-const schCur = () => schList().some(x => x[0] === S.sch.tab) ? S.sch.tab : 'history';
+/* หมวดมาตรฐานที่ผู้ดูแล "ลบ" (ซ่อน) ออกจากหน้าเว็บ: เก็บใน Settings คีย์ hiddenSections เป็น JSON ["motto",...] ข้อมูลเดิมไม่หาย */
+function getHidden() {
+  try { const v = JSON.parse(S.settings.hiddenSections || '[]'); return Array.isArray(v) ? v.map(String) : []; } catch (e) { return []; }
+}
+const schList = () => SCH.filter(x => getHidden().indexOf(x[0]) < 0).concat(getSecs().map(c => ['c_' + c.id, 'star', c.title]));
+const schCur = () => schList().some(x => x[0] === S.sch.tab) ? S.sch.tab : ((schList()[0] || [])[0] || '');
 function schText(k) {
   const s = S.settings;
   if (k === 'colors') return [s.schoolColors, s.schoolColor1, s.schoolColor2].filter(Boolean).join(' ');
@@ -1115,7 +1119,8 @@ function schInner(k) {
 function schTabs() {
   const cur = schCur();
   return schList().map(x => '<button data-act="schtab" data-k="' + esc(x[0]) + '" class="' + (cur === x[0] ? 'on' : '') + '">' + esc(x[2]) + '</button>').join('') +
-    (S.admin ? '<button class="add" data-act="addsec">+ เพิ่มหมวดหมู่</button>' : '');
+    (S.admin ? '<button class="add" data-act="addsec">+ เพิ่มหมวดหมู่</button>' : '') +
+    (S.admin ? SCH.filter(x => getHidden().indexOf(x[0]) >= 0).map(x => '<button class="add" data-act="showsec" data-k="' + esc(x[0]) + '" title="แสดงหมวดนี้กลับมา">↺ แสดง "' + esc(x[2]) + '"</button>').join('') : '');
 }
 function schBody() {
   const all = schList(), cur = schCur();
@@ -1125,8 +1130,8 @@ function schBody() {
     const custom = x[0].indexOf('c_') === 0, sid = x[0].slice(2);
     const acts = !S.admin ? '' : '<div class="ab-edit">' + (custom
       ? adminBtn('editsec', 'แก้ไขข้อมูล', 'data-id="' + esc(sid) + '"') + '<button class="btn danger sm" data-act="delsec" data-id="' + esc(sid) + '">ลบหมวดหมู่</button>'
-      : x[0] === 'commanders' ? adminBtn('additem', '+ เพิ่มรายชื่อผู้บังคับบัญชา', 'data-t="cmd"')
-      : adminBtn('nav', 'แก้ไขข้อมูล', 'data-p="settings"')) + '</div>';
+      : (x[0] === 'commanders' ? adminBtn('additem', '+ เพิ่มรายชื่อผู้บังคับบัญชา', 'data-t="cmd"') : adminBtn('nav', 'แก้ไขข้อมูล', 'data-p="settings"')) +
+        '<button class="btn danger sm" data-act="hidesec" data-k="' + esc(x[0]) + '">ลบหมวดนี้</button>') + '</div>';
     return '<article class="ab-card' + (x[0] === 'motto' ? ' motto' : '') + '"><h3 class="ab-t">' + ico('spark') + '<span>' + esc(x[2]) + '</span>' + ico('spark') + '</h3><div class="ab-line"></div>' + schInner(x[0]) + acts + '</article>';
   }).join('');
 }
@@ -1173,6 +1178,23 @@ function saveSec(id) {
     arr.push({ id: sid, title: title, text: text });
   }
   persistSecs(arr, 'c_' + sid);
+}
+function persistHidden(arr, tab, msg) {
+  api('saveSettings', [{ hiddenSections: JSON.stringify(arr) }, S.pwd], 'กำลังบันทึก...').then(r => {
+    if (!check(r)) return;
+    S.settings = r.settings || S.settings;
+    if (tab) S.sch.tab = tab;
+    toast(msg, 'ok'); render();
+  }).catch(() => {});
+}
+function hideSec(k) {
+  const x = SCH.find(z => z[0] === k); if (!x) return;
+  if (!confirm('ลบหมวด "' + x[2] + '" ออกจากหน้าเว็บ?\n(ข้อมูลที่กรอกไว้ไม่หาย และกด "↺ แสดง" เพื่อนำกลับมาได้)')) return;
+  const arr = getHidden(); if (arr.indexOf(k) < 0) arr.push(k);
+  persistHidden(arr, '', 'ลบหมวดออกจากหน้าเว็บแล้ว');
+}
+function showSec(k) {
+  persistHidden(getHidden().filter(z => z !== k), k, 'แสดงหมวดกลับมาแล้ว');
 }
 function delSec(id) {
   if (!confirm('ยืนยันการลบหมวดหมู่นี้?')) return;
@@ -1784,6 +1806,8 @@ document.addEventListener('click', e => {
     case 'editsec': secModal(d.id); break;
     case 'savesec': saveSec(d.id); break;
     case 'delsec': delSec(d.id); break;
+    case 'hidesec': hideSec(d.k); break;
+    case 'showsec': showSec(d.k); break;
     case 'orgmode': S.org.mode = d.m; S.org.val = ''; render(); break;
     case 'retry': boot(); break;
     case 'close': closeModal(); break;
